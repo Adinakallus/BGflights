@@ -2,7 +2,8 @@ using System;
 
 namespace Flights_BE
 {
-    public class Class1
+    public class Class2
     {
+
     }
 }
