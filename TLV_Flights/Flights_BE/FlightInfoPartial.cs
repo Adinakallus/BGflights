@@ -6,8 +6,10 @@ using System.Threading.Tasks;
 
 namespace Flights_BE
 {
-    internal class FlightInfoPartial
+    public class FlightInfoPartial
     {
+        //general information about the flights
+        //Save this information to the DB
         public int Id { get; set; }
         public string SourceId { get; set; }
         public double Longitude { get; set; }

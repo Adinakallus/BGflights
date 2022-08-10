@@ -8,6 +8,7 @@ namespace Flights_BE
 {
     internal class FlightInfo
     {
+        // For a specific flight
         // Root myDeserializedClass = JsonConvert.DeserializeObject<Root>(myJsonResponse);
         public class Aircraft
         {
