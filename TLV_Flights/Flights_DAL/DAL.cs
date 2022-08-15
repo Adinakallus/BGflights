@@ -117,22 +117,49 @@ namespace Flights_DAL
             });
         }
 
-
-
-
         public List<User> GetAllUsers()
         {
-
+            using var ctx = new FlightsDB();
+            return ctx.UsersAndPasswords.ToList();
         }
 
+        //לא גמור - לבדוק אם הטריי וקטץ נכון
+        //להגדיר אקספשן למקרה שלא נמצא יוזר
         public User GetUser(String userName)
         {
-
+            List<User> allUsers = GetAllUsers();
+            try
+            {
+                foreach(User user in allUsers)
+                {
+                    if(user.Username == userName)
+                        return user;
+                }
+            }
+            catch (Exception)
+            {
+                throw noUserException;
+            }
+            return;
         }
 
+        //להגדיר אקספשן למקרה שלא נמצא יוזר
+        //זה אותו אקספשן שמשתמשים בו למעלה
         public void UpdatePassword(String userName, String password)
         {
-
+            List<User> allUsers = GetAllUsers();
+            try
+            {
+                foreach (User user in allUsers)
+                {
+                    if (user.Username == userName)
+                        user.Password = password;
+                }
+            }
+            catch (Exception)
+            {
+                throw noUserException;
+            }
         }
 
         public List<FlightInfo> GetFlightsHistory(String userName) //make sure the BAL is checking the dates

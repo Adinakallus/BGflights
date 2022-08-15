@@ -16,6 +16,6 @@ namespace Flights_DAL
         }
 
         public DbSet<User> UsersAndPasswords { get; set; }
-        public DbSet<FlightInfoPartial> flightsHistory { get; set; }
+        public DbSet<FlightInfoPartial> FlightsHistory { get; set; }
     }
 }
