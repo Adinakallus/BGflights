@@ -123,28 +123,20 @@ namespace Flights_DAL
             return ctx.UsersAndPasswords.ToList();
         }
 
-        //לא גמור - לבדוק אם הטריי וקטץ נכון
-        //להגדיר אקספשן למקרה שלא נמצא יוזר
         public User GetUser(String userName)
         {
             List<User> allUsers = GetAllUsers();
             try
             {
-                foreach(User user in allUsers)
-                {
-                    if(user.Username == userName)
-                        return user;
-                }
+                return allUsers.Find(u => u.Username == userName);
             }
             catch (Exception)
             {
-                throw noUserException;
+                throw new NoUserException(userName);
             }
-            return;
+                
         }
 
-        //להגדיר אקספשן למקרה שלא נמצא יוזר
-        //זה אותו אקספשן שמשתמשים בו למעלה
         public void UpdatePassword(String userName, String password)
         {
             List<User> allUsers = GetAllUsers();
@@ -158,13 +150,15 @@ namespace Flights_DAL
             }
             catch (Exception)
             {
-                throw noUserException;
+                throw new NoUserException(userName);
             }
         }
 
-        public List<FlightInfo> GetFlightsHistory(String userName) //make sure the BAL is checking the dates
+        public Dictionary<DateTime, FlightInfoPartial> GetFlightsHistory(String userName) //make sure the BAL is checking the dates
         {
-
+            if(GetUser(userName).FlightsHistory != null)
+                return GetUser(userName).FlightsHistory;
+            throw new NoFlightsException(userName);
         }
 
         public FlightInfo GetFlightInfo(String flightID)
