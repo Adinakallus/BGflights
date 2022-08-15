@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Flights_BE
 {
-    internal class FlightInfo
+    public class FlightInfo
     {
         // For a specific flight
         // Root myDeserializedClass = JsonConvert.DeserializeObject<Root>(myJsonResponse);
