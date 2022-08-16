@@ -6,7 +6,20 @@ using System.Threading.Tasks;
 
 namespace Flights_BE
 {
-    internal class HebCal
+    public class HebCal
     {
+        // Root myDeserializedClass = JsonConvert.DeserializeObject<Root>(myJsonResponse);
+        public class Item
+        {
+            public string title { get; set; } //erev chag or chag
+            public object date { get; set; }
+            public string hdate { get; set; }
+            public string category { get; set; }
+            public string hebrew { get; set; }
+            public string memo { get; set; }
+            public string link { get; set; }
+            public string title_orig { get; set; }
+            public string subcat { get; set; }
+        }
     }
 }

@@ -12,6 +12,8 @@ namespace Flights_DAL
 {
     public class Dal
     {
+        private const String APIkey = "464586a1b635bd8df1683892c3b27dd6"; // <= API key 
+
         //ctor
         public Dal()
         {
@@ -91,16 +93,13 @@ namespace Flights_DAL
 
             var request = new RestRequest(Method.GET);
             var response = client.ExecuteAsync<List<FlightInfoPartial>>(request); // using the async method caused an error due to synchronization issues
-           
-
-         
 
 
-       
+
             List<FlightInfoPartial> flightsList = response.
             foreach (var flight in response.Result)
-            { 
-                if(flight)
+            {
+                if (flight)
             }
             return await;
         }//need to figure out
@@ -123,7 +122,7 @@ namespace Flights_DAL
             return ctx.UsersAndPasswords.ToList();
         }
 
-        public User GetUser(String userName)
+        public User GetUserByUsername(String userName)
         {
             List<User> allUsers = GetAllUsers();
             try
@@ -134,7 +133,7 @@ namespace Flights_DAL
             {
                 throw new NoUserException(userName);
             }
-                
+
         }
 
         public void UpdatePassword(String userName, String password)
@@ -156,25 +155,36 @@ namespace Flights_DAL
 
         public Dictionary<DateTime, FlightInfoPartial> GetFlightsHistory(String userName) //make sure the BAL is checking the dates
         {
-            if(GetUser(userName).FlightsHistory != null)
-                return GetUser(userName).FlightsHistory;
+            if (GetUserByUsername(userName).FlightsHistory != null)
+                return GetUserByUsername(userName).FlightsHistory;
             throw new NoFlightsException(userName);
         }
-
-        public FlightInfo GetFlightInfo(String flightID)
+        /// <summary>
+        /// get information about a specific flight when cliking on the flight
+        /// </summary>
+        /// <param name="flight"></param>
+        /// <returns></returns>
+        public async Task<FlightInfo> GetFlightInfo(FlightInfoPartial flight)
         {
-
+            String fLightURL = $"https://data-live.flightradar24.com/clickhandler/?version=1.5&flight={flight.Id}";
+            FlightInfo flightInfo = await GetFromApi<dynamic>(fLightURL);
+            return flightInfo;
         }
 
-        public double GetWeather(String location) //by current date
+        public async Task<OpenWeather.Weather> GetWeather(FlightInfo.Airport airport) //by current date
         {
-
+            double lat = airport.destination.position.latitude;
+            double lon = airport.destination.position.longitude;
+            String weatherURL = $"https://api.openweathermap.org/data/2.5/weather?lat={lat}&lon={lon}&appid={APIkey}";
+            OpenWeather.Weather weather = await GetFromApi<dynamic>(weatherURL);
+            return weather;
         }
 
-        public bool GetHebDate() //by current date
+        public async Task<HebCal.Item> GetHebDate(DateTime date) //by current date?
         {
-            //לבדוק מה אמור להחזיר
+            String hebCalURL = $"https://www.hebcal.com/hebcal?v=1&cfg=json&maj=on&min=on&mod=on&nx=on&year={date.Year}&month={date.Month}&ss=on&mf=on&c=on&geo=geoname&geonameid=3448439&M=on&s=on&start={date.Day}&end={date.AddDays(7)}";
+            HebCal.Item hebDate = await GetFromApi<dynamic>(hebCalURL);
+            return hebDate;
         }
-
     }
 }
