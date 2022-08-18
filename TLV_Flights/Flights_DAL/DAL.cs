@@ -86,23 +86,27 @@ namespace Flights_DAL
             //link to the list of ALL flights
             String uri =
                 $"https://data-cloud.flightradar24.com/zones/fcgi/feed.js?faa=1&bounds=55.428%2C47.202%2C-8.085%2C7.845&satellite=1&mlat=1&flarm=1&adsb=1&gnd=1&air=1&vehicles=1&estimated=1&maxage=14400&gliders=1&stats=1";
-            var client = new RestClient(uri)
+            try
             {
-                Timeout = -1
-            };
-
-            var request = new RestRequest(Method.GET);
-            var response = client.ExecuteAsync<List<FlightInfoPartial>>(request); // using the async method caused an error due to synchronization issues
-
-
-
-            List<FlightInfoPartial> flightsList = response.
-            foreach (var flight in response.Result)
-            {
-                if (flight)
+                var client = new RestClient(uri)
+                {
+                    Timeout = -1
+                };
+                var request = new RestRequest(Method.GET);
+                var response = client.ExecuteAsync<List<FlightInfoPartial>>(request); // using the async method caused an error due to synchronization issues
+                List<FlightInfoPartial> flightsList = response.Result.Data.ToList();
+                foreach (var flight in flightsList)
+                {
+                    if (flight.Destination != "TLV" && flight.Source != "TLV")
+                        flightsList.Remove(flight);
+                }
+                return flightsList;
             }
-            return await;
-        }//need to figure out
+            catch(Exception)
+            {
+                throw new JsonErrorException();
+            }
+        }
 
         public void CreateUser(String userName, String password) //make sure to check username duplicates in BAL
         {
