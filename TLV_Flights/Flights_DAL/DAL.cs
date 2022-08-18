@@ -74,6 +74,55 @@ namespace Flights_DAL
                 return JsonConvert.DeserializeObject<dynamic>(string.Empty);
             }
         }
+        #region User
+        public void CreateUser(String userName, String password) //make sure to check username duplicates in BAL
+        {
+            FlightsDB dbContext = new FlightsDB();
+            Dictionary<DateTime, FlightInfoPartial> flightsHistory = new();
+            dbContext.UsersAndPasswords.Add(new User()
+            {
+                Username = userName,
+                Password = password,
+                FlightsHistory = flightsHistory
+            });
+        }
+
+        public void UpdatePassword(String userName, String password)
+        {
+            List<User> allUsers = GetAllUsers();
+            try
+            {
+                foreach (User user in allUsers)
+                {
+                    if (user.Username == userName)
+                        user.Password = password;
+                }
+            }
+            catch (Exception)
+            {
+                throw new NoUserException(userName);
+            }
+        }
+
+        public User GetUserByUsername(String userName)
+        {
+            List<User> allUsers = GetAllUsers();
+            try
+            {
+                return allUsers.Find(u => u.Username == userName);
+            }
+            catch (Exception)
+            {
+                throw new NoUserException(userName);
+            }
+
+        }
+
+        public List<User> GetAllUsers()
+        {
+            using var ctx = new FlightsDB();
+            return ctx.UsersAndPasswords.ToList();
+        }
 
         public List<User> GetUsersAndPasswords()
         {
@@ -81,6 +130,19 @@ namespace Flights_DAL
             return ctx.UsersAndPasswords.ToList();
         }
 
+        public void AddFlightToHistory(User user, FlightInfoPartial flight)
+        {
+            List<User> users = GetAllUsers();
+            foreach (var _user in users)
+            {
+                if (_user.Id == user.Id)
+                    _user.FlightsHistory.Add(DateTime.Today, flight);
+            }
+        }
+
+        #endregion
+
+        #region Flights
         public async Task<List<FlightInfoPartial>> GetFlightsFromAPI()
         {
             //link to the list of ALL flights
@@ -102,58 +164,9 @@ namespace Flights_DAL
                 }
                 return flightsList;
             }
-            catch(Exception)
+            catch (Exception)
             {
                 throw new JsonErrorException();
-            }
-        }
-
-        public void CreateUser(String userName, String password) //make sure to check username duplicates in BAL
-        {
-            FlightsDB dbContext = new FlightsDB();
-            Dictionary<DateTime, FlightInfoPartial> flightsHistory = new();
-            dbContext.UsersAndPasswords.Add(new User()
-            {
-                Username = userName,
-                Password = password,
-                FlightsHistory = flightsHistory
-            });
-        }
-
-        public List<User> GetAllUsers()
-        {
-            using var ctx = new FlightsDB();
-            return ctx.UsersAndPasswords.ToList();
-        }
-
-        public User GetUserByUsername(String userName)
-        {
-            List<User> allUsers = GetAllUsers();
-            try
-            {
-                return allUsers.Find(u => u.Username == userName);
-            }
-            catch (Exception)
-            {
-                throw new NoUserException(userName);
-            }
-
-        }
-
-        public void UpdatePassword(String userName, String password)
-        {
-            List<User> allUsers = GetAllUsers();
-            try
-            {
-                foreach (User user in allUsers)
-                {
-                    if (user.Username == userName)
-                        user.Password = password;
-                }
-            }
-            catch (Exception)
-            {
-                throw new NoUserException(userName);
             }
         }
 
@@ -174,6 +187,7 @@ namespace Flights_DAL
             FlightInfo flightInfo = await GetFromApi<dynamic>(fLightURL);
             return flightInfo;
         }
+        #endregion
 
         public async Task<OpenWeather.Weather> GetWeather(FlightInfo.Airport airport) //by current date
         {

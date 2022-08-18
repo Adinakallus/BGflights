@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Flights_DAL;
+using Flights_BE;
 
 namespace Flights_BL
 {
@@ -11,11 +12,20 @@ namespace Flights_BL
     {
         private readonly Dal _dal = new();
 
-
         public bool CheckUserAndPassword(string user, string password)
         {
             var usersFromDb = _dal.GetUsersAndPasswords();
             return usersFromDb.Any(userFromDb => userFromDb.Username == user && userFromDb.Password == password);
+        }
+
+        public async Task<List<FlightInfoPartial>> GetFlights()
+        {
+            return await _dal.GetFlightsFromAPI();
+        }
+
+        public async Task<FlightInfo> GetFlightInfo(FlightInfoPartial flight)
+        {
+            return await _dal.GetFlightInfo(flight);
         }
     }
 }
