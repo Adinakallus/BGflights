@@ -35,23 +35,59 @@ namespace Flights_BL
 
         public void UpdatePassword(String userName, String password)
         {
-
+            try
+            {
+                _dal.UpdatePassword(userName, password);
+            }
+            catch(Exception)
+            {
+                throw new NoUserException(userName);
+            }
         }
 
 
         public User GetUserByUsername(String userName)
         {
+            try
+            {
+                return _dal.GetUserByUsername(userName);
+            }
+            catch (Exception)
+            {
 
+                throw new NoUserException(userName);
+            }
         }
 
         public List<User> GetAllUsers()
         {
+            try
+            {
+                return _dal.GetAllUsers();
+            }
+            catch (Exception)
+            {
 
+                throw new ZeroUsersException();
+            }
+        }
+
+        public List<User> GetUsersAndPasswords()
+        {
+            try
+            {
+                return _dal.GetAllUsers();
+            }
+            catch (Exception)
+            {
+
+                throw new ZeroUsersException();
+            }
         }
 
         public void AddFlightToHistory(User user, FlightInfoPartial flight)
         {
-
+            _dal.AddFlightToHistory(user, flight);            
         }
         #endregion
 
@@ -64,6 +100,19 @@ namespace Flights_BL
         public async Task<FlightInfo> GetFlightInfo(FlightInfoPartial flight)
         {
             return await _dal.GetFlightInfo(flight);
+        }
+
+        public Dictionary<DateTime, FlightInfoPartial> GetFlightsHistory(String userName)
+        {
+            try
+            {
+                return _dal.GetFlightsHistory(userName); 
+            }
+            catch (Exception)
+            {
+
+                throw new NoFlightsException(userName);
+            }
         }
         #endregion
 
@@ -88,5 +137,5 @@ namespace Flights_BL
             return false;
         }
 
-}
+    }
 }
