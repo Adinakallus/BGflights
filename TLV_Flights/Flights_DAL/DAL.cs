@@ -60,7 +60,7 @@ namespace Flights_DAL
 
         }
 
-        public async Task<dynamic> GetFromApi<dynamic>(String url)
+        private async Task<dynamic> GetFromApi<dynamic>(String url)
         {
             try
             {
@@ -74,9 +74,13 @@ namespace Flights_DAL
                 return JsonConvert.DeserializeObject<dynamic>(string.Empty);
             }
         }
+       
         #region User
         public void CreateUser(String userName, String password) //make sure to check username duplicates in BAL
         {
+            //////
+            //add serial number for the user id
+            /////
             FlightsDB dbContext = new FlightsDB();
             Dictionary<DateTime, FlightInfoPartial> flightsHistory = new();
             dbContext.UsersAndPasswords.Add(new User()
@@ -176,6 +180,7 @@ namespace Flights_DAL
                 return GetUserByUsername(userName).FlightsHistory;
             throw new NoFlightsException(userName);
         }
+       
         /// <summary>
         /// get information about a specific flight when cliking on the flight
         /// </summary>
@@ -187,6 +192,7 @@ namespace Flights_DAL
             FlightInfo flightInfo = await GetFromApi<dynamic>(fLightURL);
             return flightInfo;
         }
+        
         #endregion
 
         public async Task<OpenWeather.Weather> GetWeather(FlightInfo.Airport airport) //by current date
