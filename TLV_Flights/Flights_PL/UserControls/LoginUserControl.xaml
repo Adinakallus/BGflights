@@ -4,10 +4,22 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:Flights_PL.UserControls"
+             xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
              mc:Ignorable="d" 
-             d:DesignHeight="450" d:DesignWidth="800">
+             d:DesignHeight="450" d:DesignWidth="800"
+             Background="White">
     <Grid>
-            
+        <!--Background-->
+        <Image 
+            Source="C:\Users\shire\source\repos\BGflights\TLV_Flights\Flights_PL\Images\yellow-green-pastel-background.jpg"
+            Stretch="Fill"
+            Opacity="0.5"
+            Grid.ColumnSpan="2"/>
+        
+
+        
+        
+        
         
     </Grid>
 </UserControl>
