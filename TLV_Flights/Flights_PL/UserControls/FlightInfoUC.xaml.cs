@@ -10,16 +10,17 @@ using System.Windows.Documents;
 using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
+using System.Windows.Navigation;
 using System.Windows.Shapes;
 
-namespace Flights_PL
+namespace Flights_PL.UserControls
 {
     /// <summary>
-    /// Interaction logic for app.xaml
+    /// Interaction logic for FlightInfoUC.xaml
     /// </summary>
-    public partial class app 
+    public partial class FlightInfoUC : UserControl
     {
-        public app()
+        public FlightInfoUC()
         {
             InitializeComponent();
         }
