@@ -12,6 +12,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\Flights_BE\Flights_BE.csproj" />
     <ProjectReference Include="..\Flights_DAL\Flights_DAL.csproj" />
   </ItemGroup>
 

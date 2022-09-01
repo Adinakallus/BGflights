@@ -10,16 +10,17 @@ using System.Windows.Documents;
 using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
+using System.Windows.Navigation;
 using System.Windows.Shapes;
 
-namespace Flights_PL
+namespace Flights_GUI
 {
     /// <summary>
-    /// Interaction logic for app.xaml
+    /// Interaction logic for MainWindow.xaml
     /// </summary>
-    public partial class app 
+    public partial class MainWindow : Window
     {
-        public app()
+        public MainWindow()
         {
             InitializeComponent();
         }
