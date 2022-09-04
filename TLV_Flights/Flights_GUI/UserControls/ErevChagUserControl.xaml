@@ -9,7 +9,7 @@
              d:DesignHeight="100" d:DesignWidth="1000">
    <Grid>
         <materialDesign:Card Background="{DynamicResource PrimaryHueDarkBrush}" Foreground="{DynamicResource PrimaryHueDarkForegroundBrush}" Width="1000" Padding="8" UniformCornerRadius="6">
-            <TextBlock TextWrapping="Wrap" Text="Erev Chag" />
+            <TextBlock Style="{StaticResource MaterialDesignHeadline3TextBlock}" Text="Week of holiday " TextAlignment="Center" />
         </materialDesign:Card>
    </Grid>
 </UserControl>
