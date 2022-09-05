@@ -16,7 +16,6 @@
     <Folder Include="Icons\" />
     <Folder Include="Images\" />
     <Folder Include="Commands\" />
-    <Folder Include="View\" />
   </ItemGroup>
 
   <ItemGroup>

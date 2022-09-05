@@ -5,9 +5,9 @@ using System.Text;
 using System.Threading.Tasks;
 using Flights_BL;
 
-namespace Flights_PL.Model
+namespace Flights_GUI.Model
 {
-    internal class LoginModel
+    public class LoginModel
     {
         private readonly BAL _bal;
 
