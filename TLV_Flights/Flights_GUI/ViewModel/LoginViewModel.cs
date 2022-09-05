@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Flights_PL.ViewModel
+namespace Flights_GUI.ViewModel
 {
     internal class LoginViewModel
     {

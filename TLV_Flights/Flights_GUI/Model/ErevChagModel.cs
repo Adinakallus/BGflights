@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 using Flights_BE;
 using Flights_BL;
 
-namespace Flights_PL.Model
+namespace Flights_GUI.Model
 {
     public class ErevChagModel
     {

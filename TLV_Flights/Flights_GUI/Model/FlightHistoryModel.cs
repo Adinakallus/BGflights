@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Flights_PL.Model
+namespace Flights_GUI.Model
 {
     internal class FlightHistoryModel
     {

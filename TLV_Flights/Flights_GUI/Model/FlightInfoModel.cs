@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 using Flights_BE;
 using Flights_BL;
 
-namespace Flights_PL.Model
+namespace Flights_GUI.Model
 {
     public class FlightInfoModel
     {
@@ -15,6 +15,7 @@ namespace Flights_PL.Model
         {
             _bal = new ();
         }   
+
         public async Task<FlightInfo> GetFlightInfo(FlightInfoPartial flight)
         {
             return await _bal.GetFlightInfo(flight);

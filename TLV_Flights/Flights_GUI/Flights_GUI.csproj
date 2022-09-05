@@ -13,9 +13,9 @@
   </ItemGroup>
 
   <ItemGroup>
+    <Folder Include="Commands\" />
     <Folder Include="Icons\" />
     <Folder Include="Images\" />
-    <Folder Include="Commands\" />
   </ItemGroup>
 
   <ItemGroup>

@@ -13,7 +13,7 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 
-namespace Flights_PL.UserControls
+namespace Flights_GUI.UserControls
 {
     /// <summary>
     /// Interaction logic for FlightInfoUC.xaml
