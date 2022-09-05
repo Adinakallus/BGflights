@@ -7,7 +7,10 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="Config.Net" Version="5.1.2" />
+    <Compile Remove="TrafficAdapter.cs" />
+  </ItemGroup>
+
+  <ItemGroup>
     <PackageReference Include="EntityFramework" Version="6.4.4" />
     <PackageReference Include="Json.Net" Version="1.0.33" />
     <PackageReference Include="LBT.RestSharp" Version="106.11.7.1" />

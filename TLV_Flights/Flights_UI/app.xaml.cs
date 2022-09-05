@@ -23,5 +23,10 @@ namespace Flights_PL
         {
             InitializeComponent();
         }
+        protected override void OnStartup(StartupEventArgs e)
+        {
+            XamlDisplay.Init();
+            base.OnStartup(e);
+        }
     }
 }

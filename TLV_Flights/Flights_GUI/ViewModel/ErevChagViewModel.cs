@@ -4,9 +4,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Flights_PL.View
+namespace Flights_GUI.ViewModel
 {
-    internal class LoginView
+    internal class ErevChagViewModel
     {
     }
 }

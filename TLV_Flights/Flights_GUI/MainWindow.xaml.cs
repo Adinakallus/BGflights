@@ -13,14 +13,14 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 
-namespace Flights_PL.UserControls
+namespace Flights_GUI
 {
     /// <summary>
-    /// Interaction logic for LoginUserControl.xaml
+    /// Interaction logic for MainWindow.xaml
     /// </summary>
-    public partial class LoginUserControl : UserControl
+    public partial class MainWindow : Window
     {
-        public LoginUserControl()
+        public MainWindow()
         {
             InitializeComponent();
         }
