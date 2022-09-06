@@ -9,10 +9,20 @@
         mc:Ignorable="d"
         Title="MainWindow" Height="450" Width="800">
     <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="263*"/>
+            <RowDefinition Height="171*"/>
+        </Grid.RowDefinitions>
+        <Button x:Name="goToUpdatePasswordBTN"
+            Style="{StaticResource MaterialDesignPaperButton}"
+            ToolTip="Resource name: MaterialDesignPaperButton"
+            Content="chnge password check"
+            HorizontalAlignment="Center"
+            IsEnabled="{Binding DataContext.ControlsEnabled, RelativeSource={RelativeSource FindAncestor, AncestorType=Window}}" Margin="197,113,269,118" Click="goToUpdatePasswordBTN_Click" />
         <Button
   Style="{StaticResource MaterialDesignPaperButton}" Width="80"
   ToolTip="Resource name: MaterialDesignPaperButton"
   Content="MID"
-  IsEnabled="{Binding DataContext.ControlsEnabled, RelativeSource={RelativeSource FindAncestor, AncestorType=Window}}" />
+  IsEnabled="{Binding DataContext.ControlsEnabled, RelativeSource={RelativeSource FindAncestor, AncestorType=Window}}" Margin="360,201,360,30" />
     </Grid>
 </Window>
