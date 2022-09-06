@@ -19,20 +19,20 @@
         <TextBlock Grid.Row="0" Text=" Bind Text to sign in login property so it will chnage based on situation" />
         <StackPanel x:Name="logInStackPanel" Visibility="Hidden" Grid.Row="1" HorizontalAlignment="Center" Grid.RowSpan="2">
             <TextBox materialDesign:HintAssist.Hint="Username" Style="{StaticResource MaterialDesignFloatingHintTextBox}" VerticalAlignment="Center" Margin="0 20 0 0" Text="{Binding Username, Mode=TwoWay}" />
-            <PasswordBox x:Name="PasswordBox"  materialDesign:HintAssist.Hint="Password" materialDesign:HintAssist.Foreground="Green"
-                         materialDesign:TextFieldAssist.UnderlineBrush="Green" Style="{StaticResource MaterialDesignFloatingHintPasswordBox}" Margin="0 40 0 0" Password="{Binding Password, Mode=TwoWay}" />
-            <Button x:Name="loginBtn" Content="Log In" HorizontalAlignment="Right" Margin="0 15 10 10" Command="{Binding }"/>
+            <PasswordBox x:Name="passwordBox"  materialDesign:HintAssist.Hint="Password" materialDesign:HintAssist.Foreground="Green"
+                         materialDesign:TextFieldAssist.UnderlineBrush="Green" Style="{StaticResource MaterialDesignFloatingHintPasswordBox}" Margin="0 40 0 0" />
+            <Button x:Name="loginBtn" Content="Log In" HorizontalAlignment="Right" Margin="0 15 10 10" Command="{Binding LoginCommand }" CommandParameter="{Binding ElementName=passwordBox}"/>
             <StackPanel x:Name="bottemRowStackPanel" Orientation="Horizontal" VerticalAlignment="Bottom" Margin="0 60 0 0">
                 <TextBlock Text="Don't have an account? " VerticalAlignment="Center" />
                 <Button x:Name="signUpBtn" Content=" Create Account"   Style="{StaticResource MaterialDesignPaperLightButton}" BorderBrush="White" Foreground="#FF673AB7"   />
             </StackPanel>
         </StackPanel>
         <StackPanel x:Name="signUpStackPanel" Visibility="Visible" Grid.Row="1" HorizontalAlignment="Center" Grid.RowSpan="2">
-            <TextBox x:Name="signUpUsernameTB" materialDesign:HintAssist.Hint="Username" Style="{StaticResource MaterialDesignFloatingHintTextBox}" VerticalAlignment="Center" Margin="0 20 0 0" />
-            <PasswordBox x:Name="SignUpPasswordBox"  materialDesign:HintAssist.Hint="Password" materialDesign:HintAssist.Foreground="Green"
+            <TextBox x:Name="signUpUsernameTB" materialDesign:HintAssist.Hint="Username" Style="{StaticResource MaterialDesignFloatingHintTextBox}" VerticalAlignment="Center" Margin="0 20 0 0" Text="{Binding Username, Mode=TwoWay}" />
+            <PasswordBox x:Name="SignUpPB"  materialDesign:HintAssist.Hint="Password" materialDesign:HintAssist.Foreground="Green"
                          materialDesign:TextFieldAssist.UnderlineBrush="Green" Style="{StaticResource MaterialDesignFloatingHintPasswordBox}" Margin="0 30 0 0" />
-            <PasswordBox x:Name="confirmPasswordBox"  materialDesign:HintAssist.Hint="Confirm Password" materialDesign:HintAssist.Foreground="Green"
-                         materialDesign:TextFieldAssist.UnderlineBrush="Green" Style="{StaticResource MaterialDesignFloatingHintPasswordBox}" Margin="0 30 0 0" />
+            <PasswordBox x:Name="confirmPB"  materialDesign:HintAssist.Hint="Confirm Password" materialDesign:HintAssist.Foreground="Green"
+                         materialDesign:TextFieldAssist.UnderlineBrush="Green" Style="{StaticResource MaterialDesignFloatingHintPasswordBox}" Margin="0 30 0 0" Password="{Binding Password}"/>
             <Button x:Name="signupCreateAccBtn" Content="Create Account" HorizontalAlignment="Right" Margin="0 10 10 10"/>
             <StackPanel x:Name="bottemRowStackPanel2" Orientation="Horizontal" VerticalAlignment="Bottom" Margin="0 20 0 0">
                 <TextBlock Text="Already have an account? " VerticalAlignment="Center" />

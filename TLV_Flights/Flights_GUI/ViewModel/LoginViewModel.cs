@@ -12,7 +12,7 @@ namespace Flights_GUI.ViewModel
     public class LoginViewModel:ViewModelBase
     {
 
-        #region constructer
+        #region constructor
         public LoginViewModel()
         {
             LoginCommand = new LoginCmnd(this);
@@ -41,8 +41,8 @@ namespace Flights_GUI.ViewModel
                 OnPropertyChanged(nameof(this.username));
             }
         }
-        private int password;
-        public int Password
+        private string password;
+        public string Password
         {
             get { return password; }
             set
@@ -50,8 +50,10 @@ namespace Flights_GUI.ViewModel
                 password = value;
                 OnPropertyChanged(nameof(password));
             }
+           
         }
         #endregion
+        private  string cofirmPassword=
 
         public ICommand LoginCommand { get; set; } 
     }
