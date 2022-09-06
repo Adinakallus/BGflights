@@ -13,21 +13,16 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 
-namespace Flights_GUI
+namespace Flights_GUI.UserControls
 {
     /// <summary>
-    /// Interaction logic for MainWindow.xaml
+    /// Interaction logic for UpdatePasswordUC.xaml
     /// </summary>
-    public partial class MainWindow : Window
+    public partial class UpdatePasswordUC : UserControl
     {
-        public MainWindow()
+        public UpdatePasswordUC()
         {
             InitializeComponent();
-        }
-
-        private void goToUpdatePasswordBTN_Click(object sender, RoutedEventArgs e)
-        {
-
         }
     }
 }
