@@ -54,7 +54,7 @@ namespace Flights_GUI.ViewModel
            
         }
         #endregion
-        private  string cofirmPassword=
+        private string cofirmPassword;
 
         public ICommand LoginCommand { get; set; } 
     }
