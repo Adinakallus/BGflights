@@ -76,19 +76,21 @@ namespace Flights_DAL
         }
        
         #region User
-        public void CreateUser(String userName, String password) //make sure to check username duplicates in BAL
+        public User CreateUser(String userName, String password) //make sure to check username duplicates in BAL
         {
             //////
             //add serial number for the user id
             /////
             FlightsDB dbContext = new FlightsDB();
             Dictionary<DateTime, FlightInfoPartial> flightsHistory = new();
-            dbContext.UsersAndPasswords.Add(new User()
+            User user = new User()
             {
                 Username = userName,
                 Password = password,
                 FlightsHistory = flightsHistory
-            });
+            };
+            dbContext.UsersAndPasswords.Add(user);
+            return user;
         }
 
         public void UpdatePassword(String userName, String password)

@@ -3,8 +3,9 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Flights_GUI.Model;
 using Flights_GUI.ViewModel;
-
+using Flights_BE;
 namespace Flights_GUI.Commands
 {
     public class LoginCmnd : CommandBase
@@ -17,7 +18,11 @@ namespace Flights_GUI.Commands
 
             public override void Execute(Object paramater)
         {
-            throw new NotImplementedException();
+            var user = paramater as User;
+            if(loginViewModel.loginModel.CheckUserAndPassword(user.Username, user.Password))
+            {
+                loginViewModel.loginModel.GetUserByUsername
+            }  
         }
     }
 }
