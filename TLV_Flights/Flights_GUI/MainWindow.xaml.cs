@@ -25,14 +25,5 @@ namespace Flights_GUI
             InitializeComponent();
         }
 
-        /// <summary>
-        /// To open the big user menue on clicking
-        /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
-        private void UserMenue_Loaded(object sender, RoutedEventArgs e)
-        {
-
-        }
     }
 }

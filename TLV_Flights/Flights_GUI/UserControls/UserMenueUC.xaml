@@ -41,17 +41,17 @@
                         Text="UserName" />
                     <Button
                             Command="{x:Static materialDesign:DrawerHost.CloseDrawerCommand}"
+                            Margin="4"
+                            HorizontalAlignment="Center"
+                            Style="{DynamicResource MaterialDesignFlatButton}"
+                            Content="Update password"/>
+                    <Button
+                            Command="{x:Static materialDesign:DrawerHost.CloseDrawerCommand}"
                             CommandParameter="{x:Static Dock.Left}"
                             Margin="4"
                             HorizontalAlignment="Center"
                             Style="{DynamicResource MaterialDesignFlatButton}"
                             Content="Flight search history" />
-                    <Button
-                            Command="{x:Static materialDesign:DrawerHost.CloseDrawerCommand}"
-                            Margin="4"
-                            HorizontalAlignment="Center"
-                            Style="{DynamicResource MaterialDesignFlatButton}"
-                            Content="Update password" />
                     <Button
                             Command="{x:Static materialDesign:DrawerHost.CloseDrawerCommand}"
                             Margin="4"
