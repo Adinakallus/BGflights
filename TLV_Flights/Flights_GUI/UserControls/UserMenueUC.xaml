@@ -6,13 +6,79 @@
              xmlns:local="clr-namespace:Flights_GUI.UserControls"
              xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
              mc:Ignorable="d" 
-             d:DesignHeight="100" d:DesignWidth="200">
+             d:DesignHeight="450" d:DesignWidth="800">
     <Grid>
-        <materialDesign:Chip
-            Content="UserName - binding"
-            Icon="U"
-            Style="{StaticResource MaterialDesignOutlineChip}"
+        <materialDesign:DrawerHost
+            x:Name="DrawerHost"
+            Height="450"
+            Width="800"
             HorizontalAlignment="Center"
-            VerticalAlignment="Center"/>
+            VerticalAlignment="Center"
+            BorderThickness="2"
+            BorderBrush="{DynamicResource MaterialDesignDivider}"
+            BottomDrawerCornerRadius="20 20 0 0"
+            BottomDrawerBackground="{DynamicResource SecondaryHueLightBrush}">
+            <materialDesign:DrawerHost.Style>
+                <Style
+                    TargetType="materialDesign:DrawerHost"
+                    BasedOn="{StaticResource {x:Type materialDesign:DrawerHost}}">
+                    <Style.Triggers>
+                        <DataTrigger
+                            Binding="{Binding IsChecked, ElementName=BackgroundToggle}"
+                            Value="True">
+                            <Setter
+                                Property="OverlayBackground"
+                                Value="{DynamicResource PrimaryHueMidBrush}" />
+                        </DataTrigger>
+                    </Style.Triggers>
+                </Style>
+            </materialDesign:DrawerHost.Style>
+            <materialDesign:DrawerHost.LeftDrawerContent>
+                <StackPanel Margin="16">
+                    <TextBlock
+                        Margin="4"
+                        HorizontalAlignment="Center"
+                        Text="UserName" />
+                    <Button
+                            Command="{x:Static materialDesign:DrawerHost.CloseDrawerCommand}"
+                            CommandParameter="{x:Static Dock.Left}"
+                            Margin="4"
+                            HorizontalAlignment="Center"
+                            Style="{DynamicResource MaterialDesignFlatButton}"
+                            Content="Flight search history" />
+                    <Button
+                            Command="{x:Static materialDesign:DrawerHost.CloseDrawerCommand}"
+                            Margin="4"
+                            HorizontalAlignment="Center"
+                            Style="{DynamicResource MaterialDesignFlatButton}"
+                            Content="Update password" />
+                    <Button
+                            Command="{x:Static materialDesign:DrawerHost.CloseDrawerCommand}"
+                            Margin="4"
+                            HorizontalAlignment="Center"
+                            Style="{DynamicResource MaterialDesignFlatButton}"
+                            Content="Log out" />
+                    <Button
+                            Command="{x:Static materialDesign:DrawerHost.CloseDrawerCommand}"
+                            Margin="4"
+                            HorizontalAlignment="Center"
+                            Style="{DynamicResource MaterialDesignFlatButton}"
+                            Content="Close" />
+                    
+                </StackPanel>
+            </materialDesign:DrawerHost.LeftDrawerContent>
+            <Grid
+                VerticalAlignment="Top"
+                HorizontalAlignment="Left">
+                <Button
+                     Style="{StaticResource MaterialDesignFloatingActionMiniLightButton}"
+                    Command="{x:Static materialDesign:DrawerHost.OpenDrawerCommand}"
+                    CommandParameter="{x:Static Dock.Left}"
+                    Grid.Column="0"
+                    Margin="17,27,-9,-19"
+                    Content="{materialDesign:PackIcon Kind=Account}" />
+
+            </Grid>
+        </materialDesign:DrawerHost>
     </Grid>
 </UserControl>
