@@ -13,6 +13,8 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 using Flights_GUI.ViewModel;
+using UserControl = System.Windows.Controls.UserControl;
+
 namespace Flights_GUI.UserControls
 {
     /// <summary>
@@ -20,9 +22,26 @@ namespace Flights_GUI.UserControls
     /// </summary>
     public partial class LoginUserControl : UserControl
     {
+        private readonly LoginViewModel _viewModel = new();
         public LoginUserControl()
         {
             InitializeComponent();
+        }
+       // public Binding ConfirmPB { get; set; }
+
+        private void SignUpButton_Click(object sender, RoutedEventArgs e)
+        {
+            if (string.Compare(ConfirmPB.Password, SignUpPB.Password) == 0)
+            {
+
+            }
+        }
+        private void PasswordBox_OnPasswordChanged(object sender, RoutedEventArgs e)
+        {
+            if (DataContext != null)
+            {
+                _viewModel.Password = ((PasswordBox)sender).Password;
+            }
         }
     }
 }
