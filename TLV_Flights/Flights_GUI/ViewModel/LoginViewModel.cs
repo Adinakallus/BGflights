@@ -19,6 +19,7 @@ namespace Flights_GUI.ViewModel
         }
 
         #endregion
+
         #region properties
         private bool isLogin;
         public bool IsLogin
