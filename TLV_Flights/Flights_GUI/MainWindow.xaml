@@ -11,8 +11,11 @@
         Title="MainWindow" Height="450" Width="800">
     <Grid>
         <Grid.RowDefinitions>
-            <RowDefinition Height="100*"/>
-            <RowDefinition Height="350*"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="*"/>
         </Grid.RowDefinitions>
         <!--<Button x:Name="goToUpdatePasswordBTN"
             Style="{StaticResource MaterialDesignPaperButton}"
@@ -27,7 +30,7 @@
             IsEnabled="{Binding DataContext.ControlsEnabled, RelativeSource={RelativeSource FindAncestor, AncestorType=Window}}" Margin="360,201,360,30" />-->
 
         <m:Map x:Name="myMap" CredentialsProvider="AuZE4zWo5xFW5WsMQOoYlKQ9z_MX1VN1TD0To1XhJMRqDuTi99wIMfJdyoNX4xYd~asANyHEBrlXx5h_5yzWgvw~AuPTWcx-_MGWt2yvPrrAyUlItM3vj0HXYJMqJKaT9PayMMlFqbTrkaK8CKvH7x_c" 
-               Center="32.0055,34.8854" ZoomLevel="6.5" Height="350" Mode="AerialWithLabels" Margin="0,113,0,6" Grid.RowSpan="2" >
+               Center="32.0055,34.8854" ZoomLevel="7" Mode="AerialWithLabels" Grid.RowSpan="4" VerticalAlignment="Stretch" Grid.Row="1" >
             <!--My API key for bing maps-->
             <!--With Ben Gurion airport longitude and latitude-->
         </m:Map>
