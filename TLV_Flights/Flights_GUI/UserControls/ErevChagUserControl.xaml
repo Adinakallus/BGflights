@@ -6,10 +6,10 @@
              xmlns:local="clr-namespace:Flights_GUI.UserControls"
              xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
              mc:Ignorable="d" 
-             d:DesignHeight="100" d:DesignWidth="1000">
+             d:DesignHeight="50" d:DesignWidth="300">
    <Grid>
-        <materialDesign:Card Background="{DynamicResource PrimaryHueDarkBrush}" Foreground="{DynamicResource PrimaryHueDarkForegroundBrush}" Width="1000" Padding="8" UniformCornerRadius="6">
-            <TextBlock Style="{StaticResource MaterialDesignHeadline3TextBlock}" Text="Week of holiday " TextAlignment="Center" />
+        <materialDesign:Card Background="{DynamicResource PrimaryHueDarkBrush}" Foreground="{DynamicResource PrimaryHueDarkForegroundBrush}" Width="300" Padding="8" UniformCornerRadius="6">
+            <TextBlock Style="{StaticResource MaterialDesignHeadline3TextBlock}" Text="check holidays for this week" FontSize="18" TextAlignment="Center" VerticalAlignment="Center" HorizontalAlignment="Center" />
         </materialDesign:Card>
    </Grid>
 </UserControl>

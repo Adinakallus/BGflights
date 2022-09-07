@@ -13,26 +13,16 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 
-namespace Flights_GUI
+namespace Flights_GUI.UserControls
 {
     /// <summary>
-    /// Interaction logic for MainWindow.xaml
+    /// Interaction logic for UserMenueUC.xaml
     /// </summary>
-    public partial class MainWindow : Window
+    public partial class UserMenueUC : UserControl
     {
-        public MainWindow()
+        public UserMenueUC()
         {
             InitializeComponent();
-        }
-
-        /// <summary>
-        /// To open the big user menue on clicking
-        /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
-        private void UserMenue_Loaded(object sender, RoutedEventArgs e)
-        {
-
         }
     }
 }
