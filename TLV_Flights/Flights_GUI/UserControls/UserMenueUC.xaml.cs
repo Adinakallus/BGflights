@@ -25,6 +25,5 @@ namespace Flights_GUI.UserControls
         {
             InitializeComponent();
         }
-
     }
 }
