@@ -11,18 +11,25 @@ namespace Flights_GUI.Commands
     public class LoginCmnd : CommandBase
     {
         private LoginViewModel loginViewModel;
-        public LoginCmnd(LoginViewModel loginViewModel)
+        public LoginCmnd(LoginViewModel _loginViewModel)
         {
-            this.loginViewModel = loginViewModel;
+            this.loginViewModel = _loginViewModel;
         }
 
-            public override void Execute(Object paramater)
+        public override void Execute(Object paramater)
         {
             var user = paramater as User;
-            if(loginViewModel.loginModel.CheckUserAndPassword(user.Username, user.Password))
+            if (loginViewModel.loginModel.CheckUserAndPassword(user.Username, user.Password))
             {
-                loginViewModel.loginModel.GetUserByUsername
-            }  
+                loginViewModel.WelcomeMessage = $"Welcome, {user.Username}";
+                //ClosewindowCommand = true;
+            }
+            else
+            {
+                loginViewModel.ShowInvalidInfo = true;
+            }
         }
     }
 }
+
+

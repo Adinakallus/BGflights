@@ -53,8 +53,26 @@ namespace Flights_GUI.ViewModel
                 isSignUp = value;
                 OnPropertyChanged(nameof(isSignUp));
             }
-        
-
+        }
+        private string welcomeMessage;
+        public string WelcomeMessage
+        {
+            get { return welcomeMessage; }
+            set
+            {
+                welcomeMessage = value;
+                OnPropertyChanged(nameof(welcomeMessage));
+            }
+        }
+        private bool showInvalidInfo;
+        public bool ShowInvalidInfo
+        {
+            get { return showInvalidInfo; }
+            set
+            {
+                showInvalidInfo = value;
+                OnPropertyChanged(nameof(showInvalidInfo));
+            }
         }
         #endregion
 
@@ -67,6 +85,7 @@ namespace Flights_GUI.ViewModel
 
             isLogin = true; 
             isSignUp=false;
+            showInvalidInfo=false;
         }
 
         #endregion

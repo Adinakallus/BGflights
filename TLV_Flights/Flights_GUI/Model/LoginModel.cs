@@ -67,7 +67,7 @@ namespace Flights_GUI.Model
             catch (Exception)
             {
 
-                throw new ZeroUsersException();
+                throw;
             }
         }
 
@@ -80,7 +80,7 @@ namespace Flights_GUI.Model
             catch (Exception)
             {
 
-                throw new ZeroUsersException();
+                throw;
             }
         }
 

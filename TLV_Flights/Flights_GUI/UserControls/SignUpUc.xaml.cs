@@ -17,7 +17,7 @@ namespace Flights_GUI.UserControls
     /// <summary>
     /// Interaction logic for SignUpUc.xaml
     /// </summary>
-    public partial class SignUpUc : Window
+    public partial class SignUpUc : UserControl
     {
         public SignUpUc()
         {
