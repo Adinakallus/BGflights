@@ -27,21 +27,6 @@ namespace Flights_GUI.UserControls
         {
             InitializeComponent();
         }
-       // public Binding ConfirmPB { get; set; }
-
-        private void SignUpButton_Click(object sender, RoutedEventArgs e)
-        {
-            if (string.Compare(ConfirmPB.Password, SignUpPB.Password) == 0)
-            {
-
-            }
-        }
-        private void PasswordBox_OnPasswordChanged(object sender, RoutedEventArgs e)
-        {
-            if (DataContext != null)
-            {
-                _viewModel.Password = ((PasswordBox)sender).Password;
-            }
-        }
     }
+        
 }
