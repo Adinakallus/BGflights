@@ -21,7 +21,7 @@ namespace Flights_GUI.Commands
             var user = paramater as User;
             if(loginViewModel.loginModel.CheckUserAndPassword(user.Username, user.Password))
             {
-                loginViewModel.loginModel.GetUserByUsername
+                //loginViewModel.loginModel.GetUserByUsername
             }  
         }
     }

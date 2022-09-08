@@ -83,9 +83,9 @@ namespace Flights_GUI.ViewModel
         }
         
 
-        this.IsloggedIn = false;
-        this.IsPassword = false;
-        this.messageVisibility = false;
+        //this.IsloggedIn = false;
+        //this.IsPassword = false;
+        //this.messageVisibility = false;
 
         #endregion
 
