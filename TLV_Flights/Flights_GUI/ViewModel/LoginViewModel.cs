@@ -85,7 +85,7 @@ namespace Flights_GUI.ViewModel
 
             isLogin = true; 
             isSignUp=false;
-            showInvalidInfo=false;
+            showInvalidInfo=true;
         }
 
         #endregion
