@@ -6,20 +6,12 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Input;
 using Flights_GUI.Commands;
+using Flights_GUI.Model;
 
 namespace Flights_GUI.ViewModel
 {
     public class LoginViewModel:ViewModelBase
     {
-
-        #region constructor
-        public LoginViewModel()
-        {
-            LoginCommand = new LoginCmnd(this);
-        }
-
-        #endregion
-
         #region properties
         private bool isLogin;
         public bool IsLogin
@@ -51,11 +43,37 @@ namespace Flights_GUI.ViewModel
                 password = value;
                 OnPropertyChanged(nameof(password));
             }
-           
+        }
+            private bool isSignUp;
+        public bool IsSignUp
+        {
+            get { return isSignUp; }
+            set
+            {
+                isSignUp = value;
+                OnPropertyChanged(nameof(isSignUp));
+            }
+        
+
         }
         #endregion
-        private string cofirmPassword;
 
+        public  Model.LoginModel loginModel= new Model.LoginModel();
+        #region constructor
+        public LoginViewModel()
+        {
+            LoginCommand = new LoginCmnd(this);
+            SignUpCommand = new SignUPCmnd(this);
+
+            isLogin = true; 
+            isSignUp=false;
+        }
+
+        #endregion
+
+      
         public ICommand LoginCommand { get; set; } 
+        public ICommand SignUpCommand { get; set; }    
+
     }
 }

@@ -18,12 +18,12 @@ namespace Flights_BL
             return usersFromDb.Any(userFromDb => userFromDb.Username == user && userFromDb.Password == password);
         }
 
-        public void CreateUser(String userName, String password)//return user?
+        public User CreateUser(String userName, String password)//return user?
         {
             try
             {
                 if (_dal.GetAllUsers().Find(u => u.Username == userName) == null)
-                    _dal.CreateUser(userName, password);
+                  return  _dal.CreateUser(userName, password);
                 else
                     throw new Exception();   
             }
