@@ -80,6 +80,8 @@ namespace Flights_GUI.ViewModel
         public UpdatePasswordVM()
         {
             UpdatePswrdCommand = new UpdatePasswordCmnd(this);
+
+            this.IsPassword = false;
         }
         
 

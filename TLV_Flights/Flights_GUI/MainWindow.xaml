@@ -27,6 +27,7 @@
         <Usercontrols:UserMenueUC x:Name="UserMenue" Grid.Row="0" Grid.RowSpan="5" HorizontalAlignment="Left" VerticalAlignment="Center" Height="434"/>
         <Usercontrols:UpdatePasswordUC x:Name="UpdatePassword" Grid.RowSpan="5" HorizontalAlignment="Center" VerticalAlignment="Center" HorizontalContentAlignment="Center" Opacity="1"
                                        Visibility="{Binding IsPassword, Converter={StaticResource BooleanToVisibilityConverter},Mode=TwoWay}"/>
-
+        <Usercontrols:LoginUserControl x:Name="Login" Visibility="{Binding LoggedIn, Converter={StaticResource BooleanToVisibilityConverter}, Mode=TwoWay}"
+                                       Grid.RowSpan="5"  HorizontalAlignment="Center" VerticalAlignment="Center" HorizontalContentAlignment="Center" Opacity="1" />
     </Grid>
 </Window>

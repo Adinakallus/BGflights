@@ -13,14 +13,14 @@ namespace Flights_GUI.ViewModel
     public class LoginViewModel:ViewModelBase
     {
         #region properties
-        private bool isLogin;
-        public bool IsLogin
+        private bool loggedIn;
+        public bool LoggedIn
         {
-            get { return isLogin; }
+            get { return loggedIn; }
             set
             {
-                isLogin = value;
-                OnPropertyChanged(nameof(IsLogin));
+                loggedIn = value;
+                OnPropertyChanged(nameof(LoggedIn));
             }
         }
 
@@ -82,10 +82,11 @@ namespace Flights_GUI.ViewModel
         {
             LoginCommand = new LoginCmnd(this);
             SignUpCommand = new SignUPCmnd(this);
+            LoginNav = new LoginNavigation(this);
 
-            isLogin = true; 
+            loggedIn = true; 
             isSignUp=false;
-            showInvalidInfo=true;
+            showInvalidInfo=false;
         }
 
         #endregion
@@ -93,6 +94,7 @@ namespace Flights_GUI.ViewModel
       
         public ICommand LoginCommand { get; set; } 
         public ICommand SignUpCommand { get; set; }    
+        public ICommand LoginNav { get; set; }  
 
     }
 }

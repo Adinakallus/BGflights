@@ -22,8 +22,8 @@
             <TextBox materialDesign:HintAssist.Hint="Username" Style="{StaticResource MaterialDesignFloatingHintTextBox}" VerticalAlignment="Center" Margin="0 20 0 0" Text="{Binding Username, Mode=TwoWay}" />
             <PasswordBox x:Name="passwordBox"  materialDesign:HintAssist.Hint="Password" materialDesign:HintAssist.Foreground="Green"
                          materialDesign:TextFieldAssist.UnderlineBrush="Green" Style="{StaticResource MaterialDesignFloatingHintPasswordBox}" Margin="0 40 0 0" />
-            <StackPanel x:FieldModifier="loginbtnStackPanel" Orientation="Horizontal">
-                <TextBlock x:Name="errorMsg" Text="{Binding WelcomeMessage}" Visibility="{Binding ShowInvalidInfo}" Margin="0 20 200 10"/>
+            <StackPanel x:Name="loginbtnStackPanel" Orientation="Horizontal">
+                <TextBlock x:Name="errorMsg" Text="Username or password incorrect" Foreground="Red" Visibility="{Binding ShowInvalidInfo}" Margin="0 20 200 10"/>
                 <Button x:Name="loginBtn" Content="Log In"  Margin="0 15 10 10" Command="{Binding LoginCommand }" CommandParameter="{Binding ElementName=passwordBox}"/>
             </StackPanel>
             <StackPanel x:Name="bottemRowStackPanel" Orientation="Horizontal" VerticalAlignment="Bottom" Margin="0 0 0 10">
