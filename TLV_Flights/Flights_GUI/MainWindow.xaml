@@ -24,5 +24,9 @@
             <!--With Ben Gurion airport longitude and latitude-->
         </m:Map>
         
+        <Usercontrols:ErevChagUserControl x:Name="ErevChag" Grid.Row="0" HorizontalAlignment="Center" Width="300" Height="50" VerticalAlignment="Center"/>
+        <Usercontrols:UserMenueUC x:Name="UserMenue" Grid.Row="0" Grid.RowSpan="5" HorizontalAlignment="Left" VerticalAlignment="Center" Height="434"/>
+        <Usercontrols:UpdatePasswordUC x:Name="UpdatePassword" Grid.RowSpan="5" HorizontalAlignment="Center" VerticalAlignment="Center" HorizontalContentAlignment="Center" Opacity="1"
+                                       Visibility="{Binding IsPassword, Converter={StaticResource BooleanToVisibilityConverter},Mode=TwoWay}"/>
     </Grid>
 </Window>
