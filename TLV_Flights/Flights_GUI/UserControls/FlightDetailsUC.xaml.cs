@@ -13,21 +13,16 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 
-namespace Flights_GUI
+namespace Flights_GUI.UserControls
 {
     /// <summary>
-    /// Interaction logic for MainWindow.xaml
+    /// Interaction logic for FlightDetailsUC.xaml
     /// </summary>
-    public partial class MainWindow : Window
+    public partial class FlightDetailsUC : UserControl
     {
-        public MainWindow()
+        public FlightDetailsUC()
         {
             InitializeComponent();
-        }
-
-        private void PackIcon_ColorChanged(object sender, RoutedPropertyChangedEventArgs<Color> e)
-        {
-
         }
     }
 }
