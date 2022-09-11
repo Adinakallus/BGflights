@@ -9,6 +9,9 @@ namespace Flights_BE
     public class HebCal
     {
         // Root myDeserializedClass = JsonConvert.DeserializeObject<Root>(myJsonResponse);
+
+        public List<Item> items { get; set; }
+
         public class Item
         {
             public string title { get; set; } //erev chag or chag
