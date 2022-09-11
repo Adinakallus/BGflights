@@ -12,6 +12,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using Flights_GUI.ViewModel;
 
 namespace Flights_GUI
 {
@@ -20,9 +21,12 @@ namespace Flights_GUI
     /// </summary>
     public partial class MainWindow : Window
     {
+        private readonly Flights_GUI.ViewModel.AllFlightsViewModel viewModel;
         public MainWindow()
         {
             InitializeComponent();
+            this.viewModel = new Flights_GUI.ViewModel.AllFlightsViewModel(this);
+            this.DataContext = viewModel;
         }
 
     }
