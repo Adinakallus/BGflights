@@ -155,6 +155,11 @@ namespace Flights_BL
         {
             return _dal.getHoliday();
         }
+
+        public bool saveChanges(User _user)
+        {
+            throw new NotImplementedException();
+        }
         #endregion
 
     }

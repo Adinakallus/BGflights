@@ -202,21 +202,7 @@ namespace Flights_BE
         public class Scheduled
         {
             public int departure { get; set; }
-            public DateTime t_departure
-            {
-                get
-                {
-                    return EpochToDate(this.departure);
-                }
-            }
             public int arrival { get; set; }
-            public DateTime t_arrival
-            {
-                get
-                {
-                    return EpochToDate(this.arrival);
-                }
-            }
         }
 
         public class Status

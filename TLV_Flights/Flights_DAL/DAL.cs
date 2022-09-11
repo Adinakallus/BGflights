@@ -12,7 +12,7 @@ using System.Diagnostics;
 
 namespace Flights_DAL
 {
-    public class Dal
+    public class Dal : IDAL
     {
         private const String APIkey = "464586a1b635bd8df1683892c3b27dd6"; // <= API key 
         private const string allURL = @"https://data-cloud.flightradar24.com/zones/fcgi/feed.js?faa=1&bounds=41.13,29.993,25.002,36.383&satellite=1&mlat=1&flarm=1&adsb=1&gnd=1&air=1&vehicles=1&estimated=1&maxage=14400&gliders=1&selected=2d1e1f33&ems=1&stats=1";
@@ -342,6 +342,21 @@ namespace Flights_DAL
                 return "A week before a holiday: " + hebCal.items.Last().title;
             }
             return "";
+        }
+
+        public bool CheckUserAndPassword(string user, string password)
+        {
+            throw new NotImplementedException();
+        }
+
+        public FlightInfo GetSingleFlight(string Id)
+        {
+            throw new NotImplementedException();
+        }
+
+        public bool saveChanges(User _user)
+        {
+            throw new NotImplementedException();
         }
 
         #endregion

@@ -10,6 +10,9 @@ EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Flights_DAL", "Flights_DAL\Flights_DAL.csproj", "{E7DBD64A-C4BF-4BC2-B3C2-6604DB6A974B}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Flights_GUI", "Flights_GUI\Flights_GUI.csproj", "{40856E9A-B6C6-4126-A7B6-D23E47E38C33}"
+	ProjectSection(ProjectDependencies) = postProject
+		{E7DBD64A-C4BF-4BC2-B3C2-6604DB6A974B} = {E7DBD64A-C4BF-4BC2-B3C2-6604DB6A974B}
+	EndProjectSection
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
