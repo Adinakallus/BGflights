@@ -92,14 +92,17 @@ namespace Flights_BL
         #endregion
 
         #region Flights
-        public async Task<List<FlightInfoPartial>> GetFlights()
+        public async Task<List<FlightInfoPartial>> GetFlightsAsync()
         {
             return await _dal.GetFlightsFromAPI();
         }
-
-        public async Task<FlightInfo> GetFlightInfo(FlightInfoPartial flight)
+        public List<FlightInfoPartial>GetFlights()
         {
-            return await _dal.GetFlightInfo(flight);
+            return _dal.GetCurrentFlights();    
+        }
+        public async Task<FlightInfo> GetFlightInfo(FlightInfoPartial flight)
+           {
+         return await _dal.GetFlightInfo(flight);
         }
 
         public Dictionary<DateTime, FlightInfoPartial> GetFlightsHistory(String userName)

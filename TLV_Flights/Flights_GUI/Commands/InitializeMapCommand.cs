@@ -13,6 +13,7 @@ namespace Flights_GUI.Commands
     public class InitializeMapCommand:CommandBase
     {
         private readonly ViewModel.AllFlightsViewModel viewModel;
+
         public InitializeMapCommand(AllFlightsViewModel viewModel)
         {
             this.viewModel = viewModel;
@@ -24,8 +25,9 @@ namespace Flights_GUI.Commands
             remove { CommandManager.RequerySuggested -= value; }
         }
 
+        
         public override void Execute(object paramater)//!!!
-        {
+        { 
             throw new NotImplementedException();
         }
 

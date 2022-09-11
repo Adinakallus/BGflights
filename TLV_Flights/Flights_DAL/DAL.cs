@@ -7,12 +7,17 @@ using Newtonsoft.Json;
 using RestSharp;
 using Json.Net;
 using Flights_BE;
+using Newtonsoft.Json.Linq;
+using System.Diagnostics;
 
 namespace Flights_DAL
 {
     public class Dal
     {
         private const String APIkey = "464586a1b635bd8df1683892c3b27dd6"; // <= API key 
+        private const string allURL = @"https://data-cloud.flightradar24.com/zones/fcgi/feed.js?faa=1&bounds=41.13,29.993,25.002,36.383&satellite=1&mlat=1&flarm=1&adsb=1&gnd=1&air=1&vehicles=1&estimated=1&maxage=14400&gliders=1&selected=2d1e1f33&ems=1&stats=1";
+          private const string uri = @"https://data-cloud.flightradar24.com/zones/fcgi/feed.js?faa=1&bounds=41.13,29.993,25.002,36.383&satellite=1&mlat=1&flarm=1&adsb=1&gnd=1&air=1&vehicles=1&estimated=1&maxage=14400&gliders=1&selected=2d1e1f33&ems=1&stats=1";
+
 
         //ctor
         public Dal()
@@ -58,6 +63,75 @@ namespace Flights_DAL
                 await dbcontext.SaveChangesAsync();
             }
 
+        }
+
+        private async Task<string> RequestData(string uri)
+        {
+            using (var webClient = new System.Net.WebClient())
+            {
+                return await webClient.DownloadStringTaskAsync(allURL).ConfigureAwait(false);
+            }
+        }
+        private string RequestDataSync(string uri)
+        {
+            using (var webClient = new System.Net.WebClient())
+            {
+                return webClient.DownloadString(uri);
+            }
+        }
+
+
+        public  List<FlightInfoPartial> GetCurrentFlights()
+        {
+            JObject AllFlightsData = null;
+            //IList<string> keys = null;
+            // IList<Object> values = null;
+
+
+            List<FlightInfoPartial> AllFlights = new List<FlightInfoPartial>();
+
+            using (var webClient = new System.Net.WebClient())
+            {
+                //async
+                //var json = RequestData(allURL); //download  data from url
+                //AllFlightsData = JObject.Parse(json.Result);
+
+                //sync
+                var json = RequestDataSync(uri);
+                AllFlightsData = JObject.Parse(json);
+                try
+                {
+                    foreach (var item in AllFlightsData)
+                    {
+                        var key = item.Key;
+                        if (key == "full_count" || key == "version")
+                            continue;
+                        if (item.Value[11].ToString() == "TLV" || item.Value[12].ToString() == "TLV")
+                            AllFlights.Add(new FlightInfoPartial
+                            {
+                                Id = -1,
+                                Source = item.Value[11].ToString(),
+                                Destination = item.Value[12].ToString(),
+                                SourceId = key,
+                                Longitude = Convert.ToDouble(item.Value[2]),
+                                Latitude = Convert.ToDouble(item.Value[1]),
+                                DateAndTime = EpochToDateTime.GetDateTimeFromeEpoch(Convert.ToDouble(item.Value[10])),
+                                FlightCode = item.Value[13].ToString(),
+                               // Location = new GeoCoordinate(Convert.ToDouble(item.Value[2]),
+                                //Convert.ToDouble(item.Value[1]))
+                            });
+                          
+                    }
+                }
+                catch (Exception e)
+                {
+                    Debug.Print(e.Message);
+                }
+
+                
+               
+            }
+            return AllFlights;
         }
 
         private async Task<dynamic> GetFromApi<dynamic>(String url)
@@ -152,11 +226,12 @@ namespace Flights_DAL
         public async Task<List<FlightInfoPartial>> GetFlightsFromAPI()
         {
             //link to the list of ALL flights
-            String uri =
-                $"https://data-cloud.flightradar24.com/zones/fcgi/feed.js?faa=1&bounds=55.428%2C47.202%2C-8.085%2C7.845&satellite=1&mlat=1&flarm=1&adsb=1&gnd=1&air=1&vehicles=1&estimated=1&maxage=14400&gliders=1&stats=1";
+         //  String uri = @"https://data-cloud.flightradar24.com/zones/fcgi/feed.js?faa=1&bounds=41.13,29.993,25.002,36.383&satellite=1&mlat=1&flarm=1&adsb=1&gnd=1&air=1&vehicles=1&estimated=1&maxage=14400&gliders=1&selected=2d1e1f33&ems=1&stats=1";
+// private const string allURL = @"https://data-cloud.flightradar24.com/zones/fcgi/feed.js?faa=1&bounds=41.13,29.993,25.002,36.383&satellite=1&mlat=1&flarm=1&adsb=1&gnd=1&air=1&vehicles=1&estimated=1&maxage=14400&gliders=1&selected=2d1e1f33&ems=1&stats=1";
+
             try
             {
-                var client = new RestClient(uri)
+                var client = new RestClient(allURL)
                 {
                     Timeout = -1
                 };

@@ -62,16 +62,21 @@ namespace Flights_GUI.ViewModel
 
         private void BackgroundThread_ProgressChanged(object sender, ProgressChangedEventArgs e)
         {
-            //set all flights:
-            this.allFlights = new ObservableCollection<FlightInfoPartial>((IEnumerable<FlightInfoPartial>)_allFlightsModel.GetFlights());
+            //refresh list of flights and list of pushpins
 
-           // mainWindow.myMap.Children.Clear();
-            
+            //Task.Run(refreshLists);
+            this.AllFlights=_allFlightsModel.UpdateFlights();
+            refreshPushpins();
+            //set all flights:
+            // this.allFlights = new ObservableCollection<FlightInfoPartial>((IEnumerable<FlightInfoPartial>)_allFlightsModel.GetFlights());
+
+            // mainWindow.myMap.Children.Clear();
+
             //Excute commands to set pushpins on map
-            initializeMapCommand.Execute(this.allFlights);
-          //  showMapCommand.Execute(OutgoingFlights);
-         //   if (this.polyline != null) //need to update poline to.
-           //     updateTrial();
+            //initializeMapCommand.Execute(this.allFlights);
+            // showMapCommand.Execute(OutgoingFlights);
+            //   if (this.polyline != null) //need to update poline to.
+            //     updateTrial();
         }
 
         private void BackgroundThread_DoWork(object sender, DoWorkEventArgs e)
@@ -84,12 +89,20 @@ namespace Flights_GUI.ViewModel
             }
         }
         #endregion
+       
         public InitializeMapCommand initializeMapCommand { get; set; }
 
-        public AllFlightsViewModel(MainWindow _mainWindow)
+
+      //  public AllFlightsViewModel(MainWindow _mainWindow)
+        public  AllFlightsViewModel()
         {
-            this.mainWindow = _mainWindow;
+            //this.mainWindow = _mainWindow;
             _allFlightsModel = new Model.AllFlightsModel();
+            this.AllFlights = _allFlightsModel.UpdateFlights();
+            refreshPushpins();
+            //initialize allFlights and pushpins
+
+            //Task.Run(refreshLists);
 
             //set thread
             this.backgroundThread = new BackgroundWorker();
@@ -104,7 +117,7 @@ namespace Flights_GUI.ViewModel
 
 
             // set function to start when the command is execute
-            showMapCommand.addFlightsToMap += ShowMapCommand_addFlightsToMap;
+            //showMapCommand.addFlightsToMap += ShowMapCommand_addFlightsToMap;
 
             //start thread that update the map every second.
             this.backgroundThread.RunWorkerAsync();
@@ -113,12 +126,21 @@ namespace Flights_GUI.ViewModel
         }
 
         #region showMapCommand
-        private void getPushpins(ObservableCollection<Flights_BE.FlightInfoPartial> listOfFlights)
+
+        private async Task refreshLists()
         {
-            if (listOfFlights != null)
+            this.allFlights = await _allFlightsModel.UpdateFlightsAsync();
+            this.refreshPushpins();
+
+        }
+        private void refreshPushpins()
+        {
+
+            if (this.allFlights != null)
             {
+           
                 this.Pushpins = new ObservableCollection<Pushpin>();
-                foreach (var flight in listOfFlights)
+                foreach (var flight in this.allFlights)
                 {
                    var longitude= flight.Longitude;
                     var latitude= flight.Latitude;
@@ -137,7 +159,8 @@ namespace Flights_GUI.ViewModel
                    */
 
                 }
-            }
+               }
+           // return this.pushpins;
         }
         private void PinCurrent_MouseDown(object sender, System.Windows.Input.MouseButtonEventArgs e)// NEED TO FINISH
         {

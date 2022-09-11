@@ -14,20 +14,18 @@ using System.Windows.Navigation;
 using System.Windows.Shapes;
 using Flights_GUI.ViewModel;
 
-namespace Flights_GUI
+namespace Flights_GUI.UserControls
 {
     /// <summary>
-    /// Interaction logic for MainWindow.xaml
+    /// Interaction logic for FlightList.xaml
     /// </summary>
-    public partial class MainWindow : Window
+    public partial class FlightList : UserControl
     {
-        private readonly Flights_GUI.ViewModel.AllFlightsViewModel viewModel;
-        public MainWindow()
+        private readonly Flights_GUI.ViewModel.AllFlightsViewModel allFlightsViewModel;
+        public FlightList()
         {
             InitializeComponent();
-            this.viewModel = new Flights_GUI.ViewModel.AllFlightsViewModel();
-            this.DataContext = viewModel;
+            allFlightsDataGrid.DataContext = allFlightsViewModel.AllFlights;
         }
-
     }
 }
