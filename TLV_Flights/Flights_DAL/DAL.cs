@@ -5,14 +5,22 @@ using System.Text;
 using System.Threading.Tasks;
 using Newtonsoft.Json;
 using RestSharp;
+using Newtonsoft.Json.Linq;
 using Json.Net;
 using Flights_BE;
+using System.Diagnostics;
 
 namespace Flights_DAL
 {
     public class Dal
     {
         private const String APIkey = "464586a1b635bd8df1683892c3b27dd6"; // <= API key 
+        private const string allURL = @"https://data-cloud.flightradar24.com/zones/fcgi/feed.js?faa=1&bounds=41.13,29.993,25.002,36.383&satellite=1&mlat=1&flarm=1&adsb=1&gnd=1&air=1&vehicles=1&estimated=1&maxage=14400&gliders=1&selected=2d1e1f33&ems=1&stats=1";
+        private const string flightURL = @"https://data-live.flightradar24.com/clickhandler/?version=1.5&flight=";
+
+        private const string holidaysAPI = @"https://www.hebcal.com/hebcal?v=1&cfg=json&maj=on&min=on&mod=on&start=";
+        private const string holidaysAPIend = @"&end=";
+
 
         //ctor
         public Dal()
@@ -74,7 +82,17 @@ namespace Flights_DAL
                 return JsonConvert.DeserializeObject<dynamic>(string.Empty);
             }
         }
-       
+
+        #region GetData
+        private string GetDataSync(string uri)
+        {
+            using (var webClient = new System.Net.WebClient())
+            {
+                return webClient.DownloadString(uri);
+            }
+        }
+        #endregion
+
         #region User
         public User CreateUser(String userName, String password) //make sure to check username duplicates in BAL
         {
@@ -136,6 +154,16 @@ namespace Flights_DAL
             return ctx.UsersAndPasswords.ToList();
         }
 
+        public User UserLogin(User _user)
+        {
+            User myuser = this.GetUserByUsername(_user.Username);
+
+            if (myuser != null)
+                return myuser;
+            else
+                return null;
+        }
+
         public void AddFlightToHistory(User user, FlightInfoPartial flight)
         {
             List<User> users = GetAllUsers();
@@ -176,6 +204,70 @@ namespace Flights_DAL
             }
         }
 
+        public Dictionary<string, List<FlightInfoPartial>> GetCurrentFlights()
+        {
+            JObject AllFlightsData = null;
+           
+            Dictionary<string, List<FlightInfoPartial>> flightsDictionary = new Dictionary<string, List<FlightInfoPartial>>();
+
+            List<FlightInfoPartial> Incoming = new List<FlightInfoPartial>();
+            List<FlightInfoPartial> Outgoing = new List<FlightInfoPartial>();
+
+            using (var webClient = new System.Net.WebClient())
+            {
+                //async
+                //var json = RequestData(allURL); //download  data from url
+                //AllFlightsData = JObject.Parse(json.Result);
+
+                //sync
+                var json = GetDataSync(allURL);
+                AllFlightsData = JObject.Parse(json);
+                try
+                {
+                    foreach (var item in AllFlightsData)
+                    {
+                        var key = item.Key;
+                        if (key == "full_count" || key == "version")
+                            continue;
+                        if (item.Value[11].ToString() == "TLV")
+                            Outgoing.Add(new FlightInfoPartial
+                            {
+                                Id = -1,
+                                Source = item.Value[11].ToString(),
+                                Destination = item.Value[12].ToString(),
+                                SourceId = key,
+                                Longitude = Convert.ToDouble(item.Value[2]),
+                                Latitude = Convert.ToDouble(item.Value[1]),
+                                DateAndTime = HelperClass.EpochToDate(Convert.ToDouble(item.Value[10])),
+                                FlightCode = item.Value[13].ToString(),
+                                //location = new GeoCoordinate(Convert.ToDouble(item.Value[2]),Convert.ToDouble(item.Value[1]))
+                            });
+                        else if (item.Value[12].ToString() == "TLV")
+                            Incoming.Add(new FlightInfoPartial
+                            {
+                                Id = -1,
+                                Source = item.Value[11].ToString(),
+                                Destination = item.Value[12].ToString(),
+                                SourceId = key,
+                                Longitude = Convert.ToDouble(item.Value[2]),
+                                Latitude = Convert.ToDouble(item.Value[1]),
+                                DateAndTime = HelperClass.EpochToDate(Convert.ToDouble(item.Value[10])),
+                                FlightCode = item.Value[13].ToString(),
+                                //location = new GeoCoordinate(Convert.ToDouble(item.Value[2]),Convert.ToDouble(item.Value[1]))
+                            });
+                    }
+                }
+                catch (Exception e)
+                {
+                    Debug.Print(e.Message);
+                }
+
+                flightsDictionary.Add("Incoming", Incoming);
+                flightsDictionary.Add("Outgoing", Outgoing);
+            }
+            return flightsDictionary;
+        }
+
         public Dictionary<DateTime, FlightInfoPartial> GetFlightsHistory(String userName) //make sure the BAL is checking the dates
         {
             if (GetUserByUsername(userName).FlightsHistory != null)
@@ -194,7 +286,27 @@ namespace Flights_DAL
             FlightInfo flightInfo = await GetFromApi<dynamic>(fLightURL);
             return flightInfo;
         }
-        
+
+        public FlightInfo getSingleFlight(string flightCode)
+        {
+            FlightInfo flightData = null;
+            try
+            {
+                string url = flightURL + flightCode;
+                var json = GetDataSync(url); //download  data from url
+                flightData = JsonConvert.DeserializeObject<FlightInfo>(json, new JsonSerializerSettings { NullValueHandling = NullValueHandling.Ignore });
+
+
+            }
+            catch (Exception e)
+            {
+                if (flightData == null)
+                    flightData = null;
+                Debug.Print(e.Message);
+            }
+            return flightData;
+        }
+
         #endregion
 
         public async Task<OpenWeather.Weather> GetWeather(FlightInfo.Airport airport) //by current date
@@ -206,11 +318,32 @@ namespace Flights_DAL
             return weather;
         }
 
+
+
+        #region Holiday
         public async Task<HebCal.Item> GetHebDate(DateTime date) //by current date?
         {
             String hebCalURL = $"https://www.hebcal.com/hebcal?v=1&cfg=json&maj=on&min=on&mod=on&nx=on&year={date.Year}&month={date.Month}&ss=on&mf=on&c=on&geo=geoname&geonameid=3448439&M=on&s=on&start={date.Day}&end={date.AddDays(7)}";
             HebCal.Item hebDate = await GetFromApi<dynamic>(hebCalURL);
             return hebDate;
         }
+
+        public string getHoliday()
+        {
+            HebCal hebCal = null;
+            string start = DateTime.Today.ToString("yyyy-MM-dd").Replace('/', '-');
+            string end = DateTime.Today.AddDays(50).ToString("yyyy-MM-dd").Replace('/', '-');
+            string url = holidaysAPI + start + holidaysAPIend + end;
+            var json = GetDataSync(url);
+            hebCal = JsonConvert.DeserializeObject<HebCal>(json, new JsonSerializerSettings { NullValueHandling = NullValueHandling.Ignore });
+            if (hebCal.items.Count > 0)
+            {
+                hebCal.items.RemoveAll(i => i.subcat == "fast");
+                return "A week before a holiday: " + hebCal.items.Last().title;
+            }
+            return "";
+        }
+
+        #endregion
     }
 }

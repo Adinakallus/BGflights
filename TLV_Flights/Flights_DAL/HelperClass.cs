@@ -8,9 +8,11 @@ namespace Flights_DAL
 {
     public class HelperClass
     {
-        public HelperClass()
+        public static DateTime EpochToDate(double epochTimeStamp)
         {
-
+            DateTime start = new DateTime(1970, 1, 1, 0, 0, 0, 0);
+            start = start.AddSeconds(epochTimeStamp).AddHours(3);
+            return start;
         }
     }
 }

@@ -4,9 +4,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Flights_GUI.Model
+namespace Flights_GUI.ViewModel
 {
-    public class WeatherModel
+    internal interface IVM
     {
     }
 }

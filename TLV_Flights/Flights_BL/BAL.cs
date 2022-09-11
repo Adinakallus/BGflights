@@ -8,7 +8,7 @@ using Flights_BE;
 
 namespace Flights_BL
 {
-    public class BAL
+    public class BAL : IBL
     {
         private readonly Dal _dal = new();
         #region User
@@ -45,7 +45,6 @@ namespace Flights_BL
             }
         }
 
-
         public User GetUserByUsername(String userName)
         {
             try
@@ -54,7 +53,6 @@ namespace Flights_BL
             }
             catch (Exception)
             {
-
                 throw new NoUserException(userName);
             }
         }
@@ -85,6 +83,11 @@ namespace Flights_BL
             }
         }
 
+        public User UserLogin(User user)
+        {
+            return this._dal.UserLogin(user);
+        }
+
         public void AddFlightToHistory(User user, FlightInfoPartial flight)
         {
             _dal.AddFlightToHistory(user, flight);            
@@ -97,9 +100,19 @@ namespace Flights_BL
             return await _dal.GetFlightsFromAPI();
         }
 
+        public Dictionary<string, List<FlightInfoPartial>> GetCurrentFlights()
+        {
+            return _dal.GetCurrentFlights();
+        }
+
         public async Task<FlightInfo> GetFlightInfo(FlightInfoPartial flight)
         {
             return await _dal.GetFlightInfo(flight);
+        }
+
+        public FlightInfo GetSingleFlight(string Id)
+        {
+            return _dal.getSingleFlight(Id);
         }
 
         public Dictionary<DateTime, FlightInfoPartial> GetFlightsHistory(String userName)
@@ -121,6 +134,7 @@ namespace Flights_BL
             return await _dal.GetWeather(airport);
         }
 
+        #region Holiday
         public async Task<HebCal.Item> GetHebDate(DateTime date) //by current date?
         {
             return  await _dal.GetHebDate(date);
@@ -136,6 +150,12 @@ namespace Flights_BL
             }
             return false;
         }
+
+        public string getHoliday()
+        {
+            return _dal.getHoliday();
+        }
+        #endregion
 
     }
 }

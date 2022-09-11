@@ -25,9 +25,5 @@ namespace Flights_GUI
             InitializeComponent();
         }
 
-        private void PackIcon_ColorChanged(object sender, RoutedPropertyChangedEventArgs<Color> e)
-        {
-
-        }
     }
 }

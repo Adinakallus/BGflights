@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Flights_BE;
 
 namespace Flights_BE
 {
@@ -10,6 +11,11 @@ namespace Flights_BE
     {
         // For a specific flight
         // Root myDeserializedClass = JsonConvert.DeserializeObject<Root>(myJsonResponse);
+
+        public Identification identification { get; set; }
+        public Time time { get; set; }
+
+
         public class Aircraft
         {
             public Model model { get; set; }
@@ -196,7 +202,21 @@ namespace Flights_BE
         public class Scheduled
         {
             public int departure { get; set; }
+            public DateTime t_departure
+            {
+                get
+                {
+                    return EpochToDate(this.departure);
+                }
+            }
             public int arrival { get; set; }
+            public DateTime t_arrival
+            {
+                get
+                {
+                    return EpochToDate(this.arrival);
+                }
+            }
         }
 
         public class Status
