@@ -12,8 +12,35 @@ namespace Flights_BE
         // For a specific flight
         // Root myDeserializedClass = JsonConvert.DeserializeObject<Root>(myJsonResponse);
 
+        public Aircraft aircraft { get; set; }
+        public Airline airline { get; set; } 
+        public Airport airport { get; set; }
+        public Code code { get; set; }
+        public Country country { get; set; }
+        public Destination destination { get; set; }
+        public Estimated estimated { get; set; }
+        public FlightHistory flightHistory { get; set; }
+        public Generic generic { get; set; }
+        public Historical historical { get; set; }
         public Identification identification { get; set; }
+        public Images images { get; set; }
+        public Info info { get; set; }
+        public Large large { get; set; }
+        public Medium medium { get; set; }
+        public Model model { get; set; }
+        public Number number { get; set; }
+        public Origin origin { get; set; }
+        public Other other { get; set; }
+        public Position position { get; set; }
+        public Real real { get; set; }
+        public Region region { get; set; }
+        public Root root { get; set; }
+        public Scheduled scheduled { get; set; }
+        public Status status { get; set; }
+        public Thumbnail thumbnail { get; set; }
         public Time time { get; set; }
+        public Timezone timezone { get; set; }
+        public Trail trail { get; set; }
 
 
         public class Aircraft

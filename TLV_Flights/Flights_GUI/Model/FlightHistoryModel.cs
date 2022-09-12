@@ -39,19 +39,19 @@ namespace Flights_GUI.Model
             }
         }
 
-        //public void setDates(DateTime from, DateTime to)
-        //{
-        //    ObservableCollection<FlightInfo> newList = new ObservableCollection<FlightInfo>();
-        //    foreach (var flight in this.flightsHistoryPerUser)
-        //    {
-        //        //Dosn't work
-        //       /* if (flight.time.scheduled.arrival >= from && flight.time.scheduled.arrival <= to)
-        //        {
-        //            newList.Add(flight);
-        //        }*/
-        //    }
-        //    this.flightsHistoryPerUser = newList;
-        //}
+        public void SetDates(DateTime from, DateTime to)
+        {
+            ObservableCollection<FlightInfo> newList = new ObservableCollection<FlightInfo>();
+            foreach (var flight in this.UserFlightsHistory)
+            {
+                Dosn't work
+                /* if (flight.time.scheduled.arrival >= from && flight.time.scheduled.arrival <= to)
+                 {
+                     newList.Add(flight);
+                 }*/
+            }
+            this.UserFlightsHistory = newList;
+        }
 
     }
 }

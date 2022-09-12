@@ -7,14 +7,53 @@ using System.Text;
 using System.Threading.Tasks;
 using Flights_GUI.Model;
 using Flights_GUI.Commands;
+using System.ComponentModel;
+using System.Runtime.CompilerServices;
 
 namespace Flights_GUI.ViewModel
 {
     public class FlightsHistoryVM : ViewModelBase
     {
         private MainWindow mainWindow { get; set; }
-
         public Model.FlightHistoryModel historyModel;
+
+        #region Properties
+        private FlightInfo _selectesFlight { get; set; }
+        public FlightInfo SelectedFlight
+        {
+            get
+            {
+                return this._selectesFlight;
+            }
+            set
+            {
+                this._selectesFlight = value;
+                OnPropertyChanged();
+            }
+        }
+
+        private bool _Search;
+        public bool Search
+        {
+            get
+            {
+                return this._Search;
+            }
+            set
+            {
+                this._Search = value;
+                OnPropertyChanged();
+            }
+        }
+
+        #endregion
+
+
+        public event PropertyChangedEventHandler PropertyChanged;
+        private void OnPropertyChanged([CallerMemberName] string name = null)
+        {
+            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(name));
+        }
 
         public ObservableCollection<FlightInfo> UserFlightsHistory
         {
@@ -28,7 +67,7 @@ namespace Flights_GUI.ViewModel
                 OnPropertyChanged();
             }
         }
-        public void showHistory()
+        public void ShowHistory()
         {
             DateTime from = DateTime.Today;
             DateTime to = DateTime.Today;
@@ -42,15 +81,15 @@ namespace Flights_GUI.ViewModel
 
             }
             //update dates on history model
-            this.historyModel.setDates(from, to);
+            this.historyModel.SetDates(from, to);
             this.UserFlightsHistory = this.historyModel.UserFlightsHistory;
         }
 
         //commands
         public FlightsHistoryCmnd flightsHistoryCmnd { get; set; }
 
-        //set command
-        userFlightsHistory = new UserFlightsHistory(this);
+        ////set command
+        //flightsHistoryCmnd = new FlightsHistoryCmnd(this);
 
     }
 }
