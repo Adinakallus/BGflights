@@ -5,6 +5,7 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:Flights_GUI.UserControls"
              xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+             xmlns:viewmodel="clr-namespace:Flights_GUI.ViewModel" 
              mc:Ignorable="d" 
              d:DesignHeight="450" d:DesignWidth="300">
     <UserControl.Resources>
@@ -19,7 +20,11 @@
         </ResourceDictionary>
     </UserControl.Resources>
     <Grid>
-        <Grid Background="White">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="287*"/>
+            <RowDefinition Height="163*"/>
+        </Grid.RowDefinitions>
+        <Grid Background="White" Grid.RowSpan="2">
             <materialDesign:Card Width="300">
                 <Grid>
                     <Grid.RowDefinitions>
@@ -68,7 +73,7 @@
                                         <RowDefinition Height="*" />
                                     </Grid.RowDefinitions>
                                     <!--<TextBlock Text="{Binding AirportName}" FontSize="20"/>-->
-                                    <TextBlock Text="Sour" 
+                                    <TextBlock Text="{Binding }" 
                                                FontSize="24" 
                                                FontWeight="Bold"
                                                HorizontalAlignment="Center" 
@@ -302,41 +307,56 @@
                     <Grid Grid.Row="3">
                         <Grid.ColumnDefinitions>
                             <ColumnDefinition Width="50" />
-                            <ColumnDefinition Width="Auto" />
-                            <ColumnDefinition Width="Auto" />
+                            <ColumnDefinition Width="100" />
+                            <ColumnDefinition Width="140" />
                             <ColumnDefinition />
                         </Grid.ColumnDefinitions>
                         <TextBlock Grid.Row="3"
                                Grid.Column="1"
-                           Margin="8 4 8 4"
+                                   HorizontalAlignment="Left"
                            Style="{StaticResource MaterialDesignBody2TextBlock}"
                            Text="Aircraft type" />
+                        <TextBlock Grid.Row="3"
+                               Grid.Column="2"
+                                   HorizontalAlignment="Right"
+                           Style="{StaticResource MaterialDesignBody2TextBlock}"
+                           Text="TO bind" />
                     </Grid>
                     <Grid Grid.Row="4">
                         <Grid.ColumnDefinitions>
                             <ColumnDefinition Width="50" />
-                            <ColumnDefinition Width="Auto" />
-                            <ColumnDefinition Width="Auto" />
+                            <ColumnDefinition Width="100" />
+                            <ColumnDefinition Width="140" />
                             <ColumnDefinition />
                         </Grid.ColumnDefinitions>
                         <TextBlock Grid.Row="3"
                                Grid.Column="1"
-                           Margin="8 4 8 4"
+                                   HorizontalAlignment="Left"
                            Style="{StaticResource MaterialDesignBody2TextBlock}"
                            Text="Ground speed" />
+                        <TextBlock Grid.Row="3"
+                               Grid.Column="2"
+                                   HorizontalAlignment="Right"
+                           Style="{StaticResource MaterialDesignBody2TextBlock}"
+                           Text="TO bind" />
                     </Grid>
                     <Grid Grid.Row="5">
                         <Grid.ColumnDefinitions>
                             <ColumnDefinition Width="50" />
-                            <ColumnDefinition Width="Auto" />
-                            <ColumnDefinition Width="Auto" />
+                            <ColumnDefinition Width="100" />
+                            <ColumnDefinition Width="140" />
                             <ColumnDefinition />
                         </Grid.ColumnDefinitions>
                         <TextBlock Grid.Row="3"
-                               Grid.Column="1"
-                           Margin="8 4 8 4"
+                                   Grid.Column="1"
+                                   HorizontalAlignment="Left"
+                                   Style="{StaticResource MaterialDesignBody2TextBlock}"
+                                   Text="Altitude" />
+                        <TextBlock Grid.Row="3"
+                               Grid.Column="2"
+                                   HorizontalAlignment="Right"
                            Style="{StaticResource MaterialDesignBody2TextBlock}"
-                           Text="Altitude" />
+                           Text="TO bind" />
                     </Grid>
 
                     <StackPanel Grid.Row="6">

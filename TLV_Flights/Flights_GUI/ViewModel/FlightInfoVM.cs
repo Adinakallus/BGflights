@@ -24,7 +24,7 @@ namespace Flights_GUI.ViewModel
         //model
         private Model.FlightInfoModel model;
 
-#region properties
+        #region properties
         private FlightInfo flight;
         public FlightInfo Flight
         {
