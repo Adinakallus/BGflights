@@ -44,11 +44,10 @@ namespace Flights_GUI.Model
             ObservableCollection<FlightInfo> newList = new ObservableCollection<FlightInfo>();
             foreach (var flight in this.UserFlightsHistory)
             {
-                Dosn't work
-                /* if (flight.time.scheduled.arrival >= from && flight.time.scheduled.arrival <= to)
+                if (flight.time.scheduled.t_arrival.Date >= from && flight.time.scheduled.t_arrival.Date <= to)
                  {
                      newList.Add(flight);
-                 }*/
+                 }
             }
             this.UserFlightsHistory = newList;
         }
