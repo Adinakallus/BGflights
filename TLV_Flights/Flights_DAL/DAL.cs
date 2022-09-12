@@ -18,6 +18,7 @@ namespace Flights_DAL
         private const String APIkey = "464586a1b635bd8df1683892c3b27dd6"; // <= API key 
         private const string allURL = @"https://data-cloud.flightradar24.com/zones/fcgi/feed.js?faa=1&bounds=41.13,29.993,25.002,36.383&satellite=1&mlat=1&flarm=1&adsb=1&gnd=1&air=1&vehicles=1&estimated=1&maxage=14400&gliders=1&selected=2d1e1f33&ems=1&stats=1";
           private const string uri = @"https://data-cloud.flightradar24.com/zones/fcgi/feed.js?faa=1&bounds=41.13,29.993,25.002,36.383&satellite=1&mlat=1&flarm=1&adsb=1&gnd=1&air=1&vehicles=1&estimated=1&maxage=14400&gliders=1&selected=2d1e1f33&ems=1&stats=1";
+        private const string fLightURL = $"https://data-live.flightradar24.com/clickhandler/?version=1.5&flight=";
 
 
         //ctor
@@ -82,60 +83,8 @@ namespace Flights_DAL
         }
 
 
-        public  List<FlightInfoPartial> GetCurrentFlights()
-        {
-            JObject AllFlightsData = null;
-            //IList<string> keys = null;
-            // IList<Object> values = null;
-
-
-            List<FlightInfoPartial> AllFlights = new List<FlightInfoPartial>();
-
-            using (var webClient = new System.Net.WebClient())
-            {
-                //async
-                //var json = RequestData(allURL); //download  data from url
-                //AllFlightsData = JObject.Parse(json.Result);
-
-                //sync
-                var json = RequestDataSync(uri);
-                AllFlightsData = JObject.Parse(json);
-                try
-                {
-                    foreach (var item in AllFlightsData)
-                    {
-                        var key = item.Key;
-                        if (key == "full_count" || key == "version")
-                            continue;
-                        if (item.Value[11].ToString() == "TLV" || item.Value[12].ToString() == "TLV")
-                            AllFlights.Add(new FlightInfoPartial
-                            {
-                                Id = -1,
-                                Source = item.Value[11].ToString(),
-                                Destination = item.Value[12].ToString(),
-                                SourceId = key,
-                                Longitude = Convert.ToDouble(item.Value[2]),
-                                Latitude = Convert.ToDouble(item.Value[1]),
-                                DateAndTime = EpochToDateTime.GetDateTimeFromeEpoch(Convert.ToDouble(item.Value[10])),
-                                FlightCode = item.Value[13].ToString(),
-                               // Location = new GeoCoordinate(Convert.ToDouble(item.Value[2]),
-                                //Convert.ToDouble(item.Value[1]))
-                            });
-                          
-                    }
-                }
-                catch (Exception e)
-                {
-                    Debug.Print(e.Message);
-                }
-
-                
-               
-            }
-            return AllFlights;
-        }
-
-        private async Task<dynamic> GetFromApi<dynamic>(String url)
+      
+private async Task<dynamic> GetFromApi<dynamic>(String url)
         {
             try
             {
@@ -224,6 +173,87 @@ namespace Flights_DAL
         #endregion
 
         #region Flights
+
+        public List<FlightInfoPartial> GetCurrentFlights()
+        {
+            JObject AllFlightsData = null;
+            //IList<string> keys = null;
+            // IList<Object> values = null;
+
+
+            List<FlightInfoPartial> AllFlights = new List<FlightInfoPartial>();
+
+            using (var webClient = new System.Net.WebClient())
+            {
+                //async
+
+                //var json = RequestData(allURL); //download  data from url
+                //AllFlightsData = JObject.Parse(json.Result);
+
+                //sync
+                var json = RequestDataSync(uri);
+                AllFlightsData = JObject.Parse(json);
+                try
+                {
+                    foreach (var item in AllFlightsData)
+                    {
+                        var key = item.Key;
+                        if (key == "full_count" || key == "version")
+                            continue;
+                        if (item.Value[11].ToString() == "TLV" || item.Value[12].ToString() == "TLV")
+                            AllFlights.Add(new FlightInfoPartial
+                            {
+                                Id = -1,
+                                Source = item.Value[11].ToString(),
+                                Destination = item.Value[12].ToString(),
+                                SourceId = key,
+                                Longitude = Convert.ToDouble(item.Value[2]),
+                                Latitude = Convert.ToDouble(item.Value[1]),
+                                DateAndTime = EpochToDateTime.GetDateTimeFromeEpoch(Convert.ToDouble(item.Value[10])),
+                                FlightCode = item.Value[13].ToString(),
+                                // Location = new GeoCoordinate(Convert.ToDouble(item.Value[2]),
+                                //Convert.ToDouble(item.Value[1]))
+                            });
+
+                    }
+                }
+                catch (Exception e)
+                {
+                    Debug.Print(e.Message);
+                }
+
+
+
+            }
+            return AllFlights;
+        }
+
+
+        /// <summary>
+        /// get information about a specific flight when cliking on the flight
+        /// </summary>
+        /// <param name="flight"></param>
+        /// <returns></returns>
+        public FlightInfo getSingleFlight(string flightCode)
+        {
+            FlightInfo flightData = null;
+            try
+            {
+                string url = fLightURL + flightCode;
+                var json = RequestDataSync(url); //download  data from url
+                flightData = JsonConvert.DeserializeObject<FlightInfo>(json, new JsonSerializerSettings { NullValueHandling = NullValueHandling.Ignore });
+
+
+            }
+            catch (Exception e)
+            {
+                if (flightData == null)
+                    flightData = null;
+                Debug.Print(e.Message);
+            }
+            return flightData;
+        }
+        /*
         public async Task<List<FlightInfoPartial>> GetFlightsFromAPI()
         {
             //link to the list of ALL flights
@@ -251,7 +281,7 @@ namespace Flights_DAL
                 throw new JsonErrorException();
             }
         }
-
+        */
         public Dictionary<DateTime, FlightInfoPartial> GetFlightsHistory(String userName) //make sure the BAL is checking the dates
         {
             if (GetUserByUsername(userName).FlightsHistory != null)
@@ -264,13 +294,13 @@ namespace Flights_DAL
         /// </summary>
         /// <param name="flight"></param>
         /// <returns></returns>
-        public async Task<FlightInfo> GetFlightInfo(FlightInfoPartial flight)
+       /* public async Task<FlightInfo> GetFlightInfo(FlightInfoPartial flight)
         {
             String fLightURL = $"https://data-live.flightradar24.com/clickhandler/?version=1.5&flight={flight.Id}";
             FlightInfo flightInfo = await GetFromApi<dynamic>(fLightURL);
             return flightInfo;
         }
-        
+       */ 
         #endregion
 
         public async Task<OpenWeather.Weather> GetWeather(FlightInfo.Airport airport) //by current date

@@ -8,6 +8,15 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Compile Remove="Commands\FlightDetailsCmnd.cs" />
+    <Compile Remove="Model\FlightsModel.cs" />
+    <Compile Remove="Model\TimeModel.cs" />
+    <Compile Remove="Model\UserAccountModel.cs" />
+    <Compile Remove="ViewModel\FlightsVM.cs" />
+    <Compile Remove="ViewModel\IVM.cs" />
+  </ItemGroup>
+
+  <ItemGroup>
     <PackageReference Include="EntityFramework" Version="6.4.4" />
     <PackageReference Include="MaterialDesignColors" Version="2.0.6" />
     <PackageReference Include="MaterialDesignThemes" Version="4.5.0" />

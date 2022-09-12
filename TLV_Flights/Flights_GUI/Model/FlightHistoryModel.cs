@@ -11,15 +11,13 @@ namespace Flights_GUI.Model
 {
     public class FlightHistoryModel
     {
-        IBL iBL;
+        
         DateTime from;
         DateTime to;
 
         public ObservableCollection<FlightInfo> flightsHistoryPerUser { get; set; }
         public FlightHistoryModel()
         {
-            BLFactory factory = new BLFactory();
-            iBL = factory.getInstacne(); //get from factory
             this.flightsHistoryPerUser = new ObservableCollection<FlightInfo>();
             this.from = DateTime.Today;
             this.to = DateTime.Today;
@@ -30,10 +28,11 @@ namespace Flights_GUI.Model
             ObservableCollection<FlightInfo> newList = new ObservableCollection<FlightInfo>();
             foreach (var flight in this.flightsHistoryPerUser)
             {
-                if (flight.time.scheduled.t_arrival.Date >= from && flight.time.scheduled.t_arrival.Date <= to)
+                //Dosn't work
+               /* if (flight.time.scheduled.arrival >= from && flight.time.scheduled.arrival <= to)
                 {
                     newList.Add(flight);
-                }
+                }*/
             }
             this.flightsHistoryPerUser = newList;
         }

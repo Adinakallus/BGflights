@@ -127,12 +127,14 @@ namespace Flights_GUI.ViewModel
 
         #region showMapCommand
 
+        /*
         private async Task refreshLists()
         {
             this.allFlights = await _allFlightsModel.UpdateFlightsAsync();
             this.refreshPushpins();
 
         }
+        */
         private void refreshPushpins()
         {
 

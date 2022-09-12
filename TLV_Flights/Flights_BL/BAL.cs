@@ -8,7 +8,7 @@ using Flights_BE;
 
 namespace Flights_BL
 {
-    public class BAL : IBL
+    public class BAL 
     {
         private readonly Dal _dal = new();
         #region User
@@ -82,12 +82,12 @@ namespace Flights_BL
                 throw new ZeroUsersException();
             }
         }
-
+        /*
         public User UserLogin(User user)
         {
             return this._dal.UserLogin(user);
         }
-
+        */
         public void AddFlightToHistory(User user, FlightInfoPartial flight)
         {
             _dal.AddFlightToHistory(user, flight);            
@@ -95,22 +95,25 @@ namespace Flights_BL
         #endregion
 
         #region Flights
-        public async Task<List<FlightInfoPartial>> GetFlightsAsync()
-        {
-            return await _dal.GetFlightsFromAPI();
-        }
+        /* public async Task<List<FlightInfoPartial>> GetFlightsAsync()
+          {
+              return await _dal.GetFlightsFromAPI();
+          }
+
+           public async Task<FlightInfo> GetFlightInfo(FlightInfoPartial flight)
+             {
+           return await _dal.GetFlightInfo(flight);
+          }*/
         public List<FlightInfoPartial>GetFlights()
         {
             return _dal.GetCurrentFlights();    
         }
-        public async Task<FlightInfo> GetFlightInfo(FlightInfoPartial flight)
-           {
-         return await _dal.GetFlightInfo(flight);
-        }
+      
+      
 
-        public FlightInfo GetSingleFlight(string Id)
+        public FlightInfo GetFlightInfo(string flightCode)
         {
-            return _dal.getSingleFlight(Id);
+            return _dal.getSingleFlight(flightCode);
         }
 
         public Dictionary<DateTime, FlightInfoPartial> GetFlightsHistory(String userName)
@@ -149,11 +152,11 @@ namespace Flights_BL
             return false;
         }
 
-        public string getHoliday()
+     /*   public string getHoliday()
         {
             return _dal.getHoliday();
         }
-
+     */
         public bool saveChanges(User _user)
         {
             throw new NotImplementedException();

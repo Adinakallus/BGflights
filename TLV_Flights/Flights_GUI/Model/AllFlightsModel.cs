@@ -17,10 +17,11 @@ namespace Flights_GUI.Model
             _bal = new BAL();
         }
 
-        public async Task<List<FlightInfoPartial>> GetFlightsAsync()
+       /* public async Task<List<FlightInfoPartial>> GetFlightsAsync()
         {
             return await _bal.GetFlightsAsync();
         }
+       */
         public List<FlightInfoPartial> GetFlights()
         {
             return _bal.GetFlights();
@@ -36,7 +37,7 @@ namespace Flights_GUI.Model
             }
             return flights;
         }
-        public async Task<ObservableCollection<FlightInfoPartial>> UpdateFlightsAsync()
+       /* public async Task<ObservableCollection<FlightInfoPartial>> UpdateFlightsAsync()
         {
             List<FlightInfoPartial> flightList = await GetFlightsAsync();
             ObservableCollection<FlightInfoPartial> flights = new();
@@ -45,7 +46,7 @@ namespace Flights_GUI.Model
                 flights.Add(flight);
             }
             return  flights;
-        }
+        }*/
 
     }
 }

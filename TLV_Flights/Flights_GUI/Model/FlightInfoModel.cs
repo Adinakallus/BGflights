@@ -16,9 +16,14 @@ namespace Flights_GUI.Model
             _bal = new ();
         }   
 
-        public async Task<FlightInfo> GetFlightInfo(FlightInfoPartial flight)
+     /*   public async Task<FlightInfo> GetFlightInfo(FlightInfoPartial flight)
         {
             return await _bal.GetFlightInfo(flight);
+        }
+     */
+     public FlightInfo GetFlightInfo(string code)
+        {
+            return _bal.GetFlightInfo(code);
         }
     }
 }

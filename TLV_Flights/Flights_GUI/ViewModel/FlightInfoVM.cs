@@ -9,7 +9,7 @@ using System.Collections.ObjectModel;
 
 namespace Flights_GUI.ViewModel
 {
-    public class FlightInfoVM//: INotifyPropertyChanged
+    public class FlightInfoVM:ViewModelBase
     {
 
     }
