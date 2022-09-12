@@ -25,22 +25,26 @@ namespace Flights_GUI.ViewModel
         private Model.FlightInfoModel model;
 
 #region properties
-        private FlightInfo flight;
-        public FlightInfo Flight
+        private Flights_BE.FlightInfo selectedFlight;
+        public Flights_BE.FlightInfo SelectedFlight
         {
-            get { return flight; }
+            get { return selectedFlight; }
             set
             {
-                flight = value;
-                OnPropertyChanged(nameof(Flight));
+                selectedFlight = value;
+                OnPropertyChanged(nameof(selectedFlight));
             }
         }
 
         #endregion
 
-        public FlightInfoVM()
+        public FlightInfoVM(FlightInfoPartial flight)
         {
             model = new FlightInfoModel();
+
+            this.SelectedFlight= model.GetFlightInfo(flight.SourceId);
+
+
         }
 
 

@@ -67,6 +67,7 @@ namespace Flights_DAL
 
         }
 
+        #region get data
         private async Task<string> RequestData(string uri)
         {
             using (var webClient = new System.Net.WebClient())
@@ -97,7 +98,8 @@ namespace Flights_DAL
                 return JsonConvert.DeserializeObject<dynamic>(string.Empty);
             }
         }
-       
+        #endregion
+
         #region User
         public User CreateUser(String userName, String password) //make sure to check username duplicates in BAL
         {
