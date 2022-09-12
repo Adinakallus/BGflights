@@ -74,6 +74,7 @@ namespace Flights_DAL
                 return await webClient.DownloadStringTaskAsync(allURL).ConfigureAwait(false);
             }
         }
+
         private string RequestDataSync(string uri)
         {
             using (var webClient = new System.Net.WebClient())
@@ -82,9 +83,7 @@ namespace Flights_DAL
             }
         }
 
-
-      
-private async Task<dynamic> GetFromApi<dynamic>(String url)
+        private async Task<dynamic> GetFromApi<dynamic>(String url)
         {
             try
             {
@@ -145,7 +144,6 @@ private async Task<dynamic> GetFromApi<dynamic>(String url)
             {
                 throw new NoUserException(userName);
             }
-
         }
 
         public List<User> GetAllUsers()
@@ -221,9 +219,6 @@ private async Task<dynamic> GetFromApi<dynamic>(String url)
                 {
                     Debug.Print(e.Message);
                 }
-
-
-
             }
             return AllFlights;
         }
@@ -288,21 +283,22 @@ private async Task<dynamic> GetFromApi<dynamic>(String url)
                 return GetUserByUsername(userName).FlightsHistory;
             throw new NoFlightsException(userName);
         }
-       
+
         /// <summary>
         /// get information about a specific flight when cliking on the flight
         /// </summary>
         /// <param name="flight"></param>
         /// <returns></returns>
-       /* public async Task<FlightInfo> GetFlightInfo(FlightInfoPartial flight)
-        {
-            String fLightURL = $"https://data-live.flightradar24.com/clickhandler/?version=1.5&flight={flight.Id}";
-            FlightInfo flightInfo = await GetFromApi<dynamic>(fLightURL);
-            return flightInfo;
-        }
-       */ 
+        /* public async Task<FlightInfo> GetFlightInfo(FlightInfoPartial flight)
+         {
+             String fLightURL = $"https://data-live.flightradar24.com/clickhandler/?version=1.5&flight={flight.Id}";
+             FlightInfo flightInfo = await GetFromApi<dynamic>(fLightURL);
+             return flightInfo;
+         }
+        */
         #endregion
 
+        #region weather
         public async Task<OpenWeather.Weather> GetWeather(FlightInfo.Airport airport) //by current date
         {
             double lat = airport.destination.position.latitude;
@@ -311,12 +307,15 @@ private async Task<dynamic> GetFromApi<dynamic>(String url)
             OpenWeather.Weather weather = await GetFromApi<dynamic>(weatherURL);
             return weather;
         }
+        #endregion
 
+        #region HebDate
         public async Task<HebCal.Item> GetHebDate(DateTime date) //by current date?
         {
             String hebCalURL = $"https://www.hebcal.com/hebcal?v=1&cfg=json&maj=on&min=on&mod=on&nx=on&year={date.Year}&month={date.Month}&ss=on&mf=on&c=on&geo=geoname&geonameid=3448439&M=on&s=on&start={date.Day}&end={date.AddDays(7)}";
             HebCal.Item hebDate = await GetFromApi<dynamic>(hebCalURL);
             return hebDate;
         }
+        #endregion
     }
 }

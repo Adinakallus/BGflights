@@ -11,31 +11,47 @@ namespace Flights_GUI.Model
 {
     public class FlightHistoryModel
     {
-        
+        private readonly BAL _bal;
+
         DateTime from;
         DateTime to;
-
+        
         public ObservableCollection<FlightInfo> flightsHistoryPerUser { get; set; }
+        
         public FlightHistoryModel()
         {
+            _bal = new BAL();
             this.flightsHistoryPerUser = new ObservableCollection<FlightInfo>();
             this.from = DateTime.Today;
             this.to = DateTime.Today;
+        }
 
-        }
-        public void setDates(DateTime from, DateTime to)
+
+        public Dictionary<DateTime, FlightInfoPartial> GetFlightsHistory(String userName)
         {
-            ObservableCollection<FlightInfo> newList = new ObservableCollection<FlightInfo>();
-            foreach (var flight in this.flightsHistoryPerUser)
+            try
             {
-                //Dosn't work
-               /* if (flight.time.scheduled.arrival >= from && flight.time.scheduled.arrival <= to)
-                {
-                    newList.Add(flight);
-                }*/
+               return _bal.GetFlightsHistory(userName);
             }
-            this.flightsHistoryPerUser = newList;
+            catch(Exception)
+            {
+                throw new Exception("Flights history is empty");
+            }
         }
+
+        //public void setDates(DateTime from, DateTime to)
+        //{
+        //    ObservableCollection<FlightInfo> newList = new ObservableCollection<FlightInfo>();
+        //    foreach (var flight in this.flightsHistoryPerUser)
+        //    {
+        //        //Dosn't work
+        //       /* if (flight.time.scheduled.arrival >= from && flight.time.scheduled.arrival <= to)
+        //        {
+        //            newList.Add(flight);
+        //        }*/
+        //    }
+        //    this.flightsHistoryPerUser = newList;
+        //}
 
     }
 }

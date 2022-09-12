@@ -108,9 +108,7 @@ namespace Flights_BL
         {
             return _dal.GetCurrentFlights();    
         }
-      
-      
-
+            
         public FlightInfo GetFlightInfo(string flightCode)
         {
             return _dal.getSingleFlight(flightCode);
@@ -124,7 +122,6 @@ namespace Flights_BL
             }
             catch (Exception)
             {
-
                 throw new NoFlightsException(userName);
             }
         }
