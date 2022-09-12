@@ -1,0 +1,352 @@
+﻿<UserControl x:Class="Flights_GUI.UserControls.FlightInfoUC"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:Flights_GUI.UserControls"
+             xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+             mc:Ignorable="d" 
+             d:DesignHeight="450" d:DesignWidth="300">
+    <UserControl.Resources>
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary Source="pack://application:,,,/MaterialDesignThemes.Wpf;component/Themes/MaterialDesignTheme.Button.xaml" />
+                <ResourceDictionary Source="pack://application:,,,/MaterialDesignThemes.Wpf;component/Themes/MaterialDesignTheme.Card.xaml" />
+                <ResourceDictionary Source="pack://application:,,,/MaterialDesignThemes.Wpf;component/Themes/MaterialDesignTheme.CheckBox.xaml" />
+                <ResourceDictionary Source="pack://application:,,,/MaterialDesignThemes.Wpf;component/Themes/MaterialDesignTheme.Flipper.xaml" />
+                <ResourceDictionary Source="pack://application:,,,/MaterialDesignThemes.Wpf;component/Themes/MaterialDesignTheme.Popupbox.xaml" />
+            </ResourceDictionary.MergedDictionaries>
+        </ResourceDictionary>
+    </UserControl.Resources>
+    <Grid>
+        <Grid Background="White">
+            <materialDesign:Card Width="300">
+                <Grid>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="110" />
+                        <RowDefinition Height="190" />
+                        <RowDefinition Height="15" />
+                        <RowDefinition Height="*" />
+                        <RowDefinition Height="*" />
+                        <RowDefinition Height="*" />
+                        <RowDefinition Height="*" />
+                    </Grid.RowDefinitions>
+                    <Image Source="C:\Users\shire\source\repos\BGflights\TLV_Flights\Flights_GUI_new\images\airplane.jpg"
+                       Height="140"
+                       Stretch="UniformToFill" />
+                    <Button Grid.Row="0"
+                            Style="{StaticResource MaterialDesignFloatingActionMiniAccentButton}"
+                            HorizontalAlignment="Right"
+                            VerticalAlignment="Bottom"
+                            Margin="0,0,10,170" 
+                            Grid.RowSpan="2" Panel.ZIndex="1"
+                            ToolTip="More info">
+                        <materialDesign:PackIcon Kind="InformationOutline" />
+                    </Button>
+
+                    <Grid x:Name="AirPortsGrid" Grid.Row="1" Margin="0,10,0,0" Background="White">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="*"/>
+                            <ColumnDefinition Width="7"/>
+                            <ColumnDefinition Width="*"/>
+                        </Grid.ColumnDefinitions>
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="100" />
+                            <RowDefinition Height="5" />
+                            <RowDefinition Height="*" />
+                            <RowDefinition Height="5" />
+                            <RowDefinition Height="*" />
+                        </Grid.RowDefinitions>
+                        <materialDesign:Flipper x:Name="LeftAirportFlipper"
+                                            Grid.Column="0" Grid.Row="0"
+                                            Style="{StaticResource MaterialDesignCardFlipper}"
+                                            materialDesign:ShadowAssist.ShadowDepth="Depth0">
+                            <materialDesign:Flipper.FrontContent>
+                                <Grid Height="256">
+                                    <Grid.RowDefinitions>
+                                        <RowDefinition Height="160" />
+                                        <RowDefinition Height="*" />
+                                    </Grid.RowDefinitions>
+                                    <!--<TextBlock Text="{Binding AirportName}" FontSize="20"/>-->
+                                    <TextBlock Text="Sour" 
+                                               FontSize="24" 
+                                               FontWeight="Bold"
+                                               HorizontalAlignment="Center" 
+                                               VerticalAlignment="Top"
+                                               Panel.ZIndex="1"/>
+                                    <TextBlock Text="&#10;&#13;Tel-Aviv" 
+                                               FontSize="13" 
+                                               FontWeight="DemiBold"
+                                               HorizontalAlignment="Center" 
+                                               VerticalAlignment="Top"
+                                               Panel.ZIndex="1"/>
+                                    <TextBlock Text="&#10;&#13;&#10;&#13;Timezone" 
+                                               FontSize="13" 
+                                               FontWeight="Normal"
+                                               HorizontalAlignment="Center" 
+                                               VerticalAlignment="Top"
+                                               Panel.ZIndex="1"/>
+                                    <materialDesign:ColorZone Mode="PrimaryLight" VerticalAlignment="Stretch">
+                                    </materialDesign:ColorZone>
+                                    <StackPanel Grid.Row="0"
+                                                HorizontalAlignment="Center"
+                                                VerticalAlignment="Center">
+                                        <Button Style="{StaticResource MaterialDesignFlatButton}"
+                                                Command="{x:Static materialDesign:Flipper.FlipCommand}"
+                                                Margin="0 4 0 0"
+                                                Content="Weather"
+                                                TextElement.Foreground="Black"/>
+                                    </StackPanel>
+                                </Grid>
+                            </materialDesign:Flipper.FrontContent>
+                            <materialDesign:Flipper.BackContent>
+                                <Grid Height="256">
+                                    <Grid.RowDefinitions>
+                                        <RowDefinition Height="Auto" />
+                                        <RowDefinition Height="*" />
+                                    </Grid.RowDefinitions>
+                                    <materialDesign:ColorZone Mode="SecondaryMid" Padding="6">
+                                        <StackPanel Orientation="Horizontal">
+                                            <Button Style="{StaticResource MaterialDesignToolForegroundButton}"
+                                                Command="{x:Static materialDesign:Flipper.FlipCommand}"
+                                                HorizontalAlignment="Left">
+                                                <materialDesign:PackIcon Kind="ArrowLeft"
+                                                                     HorizontalAlignment="Right" />
+                                            </Button>
+                                            <TextBlock Margin="8 0 0 0"
+                                                   VerticalAlignment="Center"
+                                                   Text="Back" />
+                                        </StackPanel>
+                                    </materialDesign:ColorZone>
+                                    <Grid Grid.Row="0"
+                                      Margin="0 6 0 0"
+                                      HorizontalAlignment="Center"
+                                      VerticalAlignment="Top"
+                                      Width="172">
+                                        <Grid.RowDefinitions>
+                                            <RowDefinition />
+                                            <RowDefinition />
+                                            <RowDefinition />
+                                            <RowDefinition />
+                                        </Grid.RowDefinitions>
+                                        <TextBox materialDesign:HintAssist.Hint="Temperature"
+                                             materialDesign:HintAssist.IsFloating="True"
+                                             Margin="0 12 0 0"
+                                             Text="To bind with OpenWeather" />
+                                        <TextBox Grid.Row="1"
+                                             materialDesign:HintAssist.Hint="Feels like"
+                                             materialDesign:HintAssist.IsFloating="True"
+                                             Margin="0 12 0 0" />
+                                        <TextBox Grid.Row="1"
+                                             materialDesign:HintAssist.Hint="Humidity"
+                                             materialDesign:HintAssist.IsFloating="True"
+                                             Margin="0 12 0 0" />
+                                        <TextBox Grid.Row="1"
+                                             materialDesign:HintAssist.Hint="Clouds(?)"
+                                             materialDesign:HintAssist.IsFloating="True"
+                                             Margin="0 12 0 0" />
+                                    </Grid>
+                                </Grid>
+                            </materialDesign:Flipper.BackContent>
+                        </materialDesign:Flipper>
+                        <materialDesign:Flipper x:Name="RightAirportFlipper"
+                                            Grid.Column="2" Grid.Row="0"
+                                            Style="{StaticResource MaterialDesignCardFlipper}"
+                                            materialDesign:ShadowAssist.ShadowDepth="Depth0">
+                            <materialDesign:Flipper.FrontContent>
+                                <Grid Height="256">
+                                    <Grid.RowDefinitions>
+                                        <RowDefinition Height="160" />
+                                        <RowDefinition Height="*" />
+                                    </Grid.RowDefinitions>
+                                    <!--<TextBlock Text="{Binding AirportName}" FontSize="20"/>-->
+                                    <TextBlock Text="Dest" 
+                                           FontSize="24" 
+                                           FontWeight="Bold"
+                                           TextElement.Foreground="Black"
+                                           HorizontalAlignment="Center" 
+                                           VerticalAlignment="Top"
+                                               Panel.ZIndex="1"/>
+                                    <TextBlock Text="&#10;&#13;Tel-Aviv" 
+                                           FontSize="13" 
+                                           FontWeight="DemiBold"
+                                           HorizontalAlignment="Center" 
+                                           VerticalAlignment="Top"
+                                               Panel.ZIndex="1"/>
+                                    <TextBlock Text="&#10;&#13;&#10;&#13;Timezone" 
+                                           FontSize="13" 
+                                           FontWeight="Normal"
+                                           HorizontalAlignment="Center" 
+                                           VerticalAlignment="Top"
+                                               Panel.ZIndex="1"/>
+                                    <materialDesign:ColorZone Mode="PrimaryLight" VerticalAlignment="Stretch">
+                                    </materialDesign:ColorZone>
+                                    <StackPanel Grid.Row="0"
+                                                HorizontalAlignment="Center"
+                                                VerticalAlignment="Center">
+                                        <Button Style="{StaticResource MaterialDesignFlatButton}"
+                                                Command="{x:Static materialDesign:Flipper.FlipCommand}"
+                                                Margin="0 4 0 0"
+                                                Content="Weather" 
+                                                TextElement.Foreground="Black"/>
+                                    </StackPanel>
+                                </Grid>
+                            </materialDesign:Flipper.FrontContent>
+                            <materialDesign:Flipper.BackContent>
+                                <Grid Height="256">
+                                    <Grid.RowDefinitions>
+                                        <RowDefinition Height="Auto" />
+                                        <RowDefinition Height="*" />
+                                    </Grid.RowDefinitions>
+                                    <materialDesign:ColorZone Mode="SecondaryMid" Padding="6">
+                                        <StackPanel Orientation="Horizontal">
+                                            <Button Style="{StaticResource MaterialDesignToolForegroundButton}"
+                                                Command="{x:Static materialDesign:Flipper.FlipCommand}"
+                                                HorizontalAlignment="Left">
+                                                <materialDesign:PackIcon Kind="ArrowLeft"
+                                                                     HorizontalAlignment="Right" />
+                                            </Button>
+                                            <TextBlock Margin="8 0 0 0"
+                                                   VerticalAlignment="Center"
+                                                   Text="Back" />
+                                        </StackPanel>
+                                    </materialDesign:ColorZone>
+                                    <Grid Grid.Row="0"
+                                      Margin="0 6 0 0"
+                                      HorizontalAlignment="Center"
+                                      VerticalAlignment="Top"
+                                      Width="172">
+                                        <Grid.RowDefinitions>
+                                            <RowDefinition />
+                                            <RowDefinition />
+                                            <RowDefinition />
+                                            <RowDefinition />
+                                        </Grid.RowDefinitions>
+                                        <TextBox materialDesign:HintAssist.Hint="Temperature"
+                                             materialDesign:HintAssist.IsFloating="True"
+                                             Margin="0 12 0 0"
+                                             Text="To bind with OpenWeather" />
+                                        <TextBox Grid.Row="1"
+                                             materialDesign:HintAssist.Hint="Feels like"
+                                             materialDesign:HintAssist.IsFloating="True"
+                                             Margin="0 12 0 0" />
+                                        <TextBox Grid.Row="1"
+                                             materialDesign:HintAssist.Hint="Humidity"
+                                             materialDesign:HintAssist.IsFloating="True"
+                                             Margin="0 12 0 0" />
+                                        <TextBox Grid.Row="1"
+                                             materialDesign:HintAssist.Hint="Clouds(?)"
+                                             materialDesign:HintAssist.IsFloating="True"
+                                             Margin="0 12 0 0" />
+                                    </Grid>
+                                </Grid>
+                            </materialDesign:Flipper.BackContent>
+                        </materialDesign:Flipper>
+
+
+
+                        <Grid x:Name="LeftScheduled" Background="WhiteSmoke" Grid.Row="2"/>
+                        <Grid x:Name="LeftActual" Background="WhiteSmoke" Grid.Row="4"/>
+                        <Grid x:Name="RIghtScheduled" Background="WhiteSmoke" Grid.Row="2" Grid.Column="2"/>
+                        <Grid x:Name="RightActual" Background="WhiteSmoke" Grid.Row="4" Grid.Column="3"/>
+
+
+                        <TextBlock Text=" Scheduled"
+                               Grid.Row="2"
+                               Grid.Column="0"
+                               HorizontalAlignment="Left"
+                               VerticalAlignment="Center"/>
+                        <TextBlock Text="*bind time*"
+                               Grid.Row="2"
+                               Grid.Column="0"
+                               HorizontalAlignment="Right"
+                               VerticalAlignment="Center"/>
+                        <TextBlock Text=" Actual"
+                               Grid.Row="4"
+                               Grid.Column="0"
+                               HorizontalAlignment="Left"
+                               VerticalAlignment="Center"/>
+                        <TextBlock Text="*bind time*"
+                               Grid.Row="4"
+                               Grid.Column="0"
+                               HorizontalAlignment="Right"
+                               VerticalAlignment="Center"/>
+                        <TextBlock Text="Scheduled"
+                               Grid.Row="2"
+                               Grid.Column="2"
+                               HorizontalAlignment="Left"
+                               VerticalAlignment="Center"/>
+                        <TextBlock Text="*bind time*"
+                               Grid.Row="2"
+                               Grid.Column="2"
+                               HorizontalAlignment="Right"
+                               VerticalAlignment="Center"/>
+                        <TextBlock Text="Actual"
+                               Grid.Row="4"
+                               Grid.Column="2"
+                               HorizontalAlignment="Left"
+                               VerticalAlignment="Center"/>
+                        <TextBlock Text="*bind time*"
+                               Grid.Row="4"
+                               Grid.Column="2"
+                               HorizontalAlignment="Right"
+                               VerticalAlignment="Center"/>
+                    </Grid>
+
+                    <!--ToDo-->
+                    <Separator Grid.Row="2"
+                            Style="{StaticResource MaterialDesignDarkSeparator}"
+                            Margin="8,2,8,25" Grid.RowSpan="2" />
+
+
+                    <Grid Grid.Row="3">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="50" />
+                            <ColumnDefinition Width="Auto" />
+                            <ColumnDefinition Width="Auto" />
+                            <ColumnDefinition />
+                        </Grid.ColumnDefinitions>
+                        <TextBlock Grid.Row="3"
+                               Grid.Column="1"
+                           Margin="8 4 8 4"
+                           Style="{StaticResource MaterialDesignBody2TextBlock}"
+                           Text="Aircraft type" />
+                    </Grid>
+                    <Grid Grid.Row="4">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="50" />
+                            <ColumnDefinition Width="Auto" />
+                            <ColumnDefinition Width="Auto" />
+                            <ColumnDefinition />
+                        </Grid.ColumnDefinitions>
+                        <TextBlock Grid.Row="3"
+                               Grid.Column="1"
+                           Margin="8 4 8 4"
+                           Style="{StaticResource MaterialDesignBody2TextBlock}"
+                           Text="Ground speed" />
+                    </Grid>
+                    <Grid Grid.Row="5">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="50" />
+                            <ColumnDefinition Width="Auto" />
+                            <ColumnDefinition Width="Auto" />
+                            <ColumnDefinition />
+                        </Grid.ColumnDefinitions>
+                        <TextBlock Grid.Row="3"
+                               Grid.Column="1"
+                           Margin="8 4 8 4"
+                           Style="{StaticResource MaterialDesignBody2TextBlock}"
+                           Text="Altitude" />
+                    </Grid>
+
+                    <StackPanel Grid.Row="6">
+                        <Button Style="{StaticResource MaterialDesignFlatButton}"
+                                HorizontalAlignment="Left"
+                                VerticalAlignment="Top"
+                                Content="Close"/>
+                    </StackPanel>
+                </Grid>
+            </materialDesign:Card>
+        </Grid>
+    </Grid>
+</UserControl>

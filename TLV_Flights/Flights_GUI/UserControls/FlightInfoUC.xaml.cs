@@ -16,11 +16,11 @@ using System.Windows.Shapes;
 namespace Flights_GUI.UserControls
 {
     /// <summary>
-    /// Interaction logic for FlightDetailsUC.xaml
+    /// Interaction logic for FlightInfoUC.xaml
     /// </summary>
-    public partial class FlightDetailsUC : UserControl
+    public partial class FlightInfoUC : UserControl
     {
-        public FlightDetailsUC()
+        public FlightInfoUC()
         {
             InitializeComponent();
         }
