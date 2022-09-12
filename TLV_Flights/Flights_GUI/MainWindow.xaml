@@ -26,9 +26,9 @@
             <!--With Ben Gurion airport longitude and latitude-->
         </m:Map>
 
-        <!--<Grid x:Name="allFlightsGrid" Width="200" HorizontalAlignment="Left" Grid.RowSpan="5">
+        <Grid x:Name="allFlightsGrid" Width="200" HorizontalAlignment="Left" Grid.RowSpan="5">
             <Usercontrols:FlightListUC  x:Name="flightList" Grid.Row="0" HorizontalAlignment="Center" Margin="0,87,0,0" />
-        </Grid>-->
+        </Grid>
         <Usercontrols:UserMenueUC x:Name="UserMenue" Grid.Row="2" HorizontalAlignment="Center" VerticalAlignment="Center" Height="434"/>
         <Usercontrols:ErevChagUserControl x:Name="ErevChag" Grid.Row="0" HorizontalAlignment="Center" Width="300" Height="50" VerticalAlignment="Center"/>
         <!--<Usercontrols:UpdatePasswordUC x:Name="UpdatePassword" Grid.RowSpan="5" HorizontalAlignment="Center" VerticalAlignment="Center" HorizontalContentAlignment="Center" Opacity="1"

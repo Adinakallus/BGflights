@@ -7,7 +7,7 @@
               xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes" 
              xmlns:viewmodel="clr-namespace:Flights_GUI.ViewModel" 
              mc:Ignorable="d" 
-             d:DesignHeight="450" d:DesignWidth="800">
+             d:DesignHeight="450" d:DesignWidth="250">
     <Grid x:Name="flightsGrid">
         <DataGrid x:Name="allFlightsDataGrid" ItemsSource="{Binding}">
             <DataGrid.Columns>

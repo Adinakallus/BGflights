@@ -4,9 +4,76 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:Flights_GUI.UserControls"
+             xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
              mc:Ignorable="d" 
-             d:DesignHeight="450" d:DesignWidth="800">
-    <Grid>
+             d:DesignHeight="450" d:DesignWidth="450">
+    <UserControl.Resources>
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary Source="pack://application:,,,/MaterialDesignThemes.Wpf;component/Themes/MaterialDesignTheme.Button.xaml" />
+                <ResourceDictionary Source="pack://application:,,,/MaterialDesignThemes.Wpf;component/Themes/MaterialDesignTheme.Card.xaml" />
+                <ResourceDictionary Source="pack://application:,,,/MaterialDesignThemes.Wpf;component/Themes/MaterialDesignTheme.CheckBox.xaml" />
+                <ResourceDictionary Source="pack://application:,,,/MaterialDesignThemes.Wpf;component/Themes/MaterialDesignTheme.Flipper.xaml" />
+                <ResourceDictionary Source="pack://application:,,,/MaterialDesignThemes.Wpf;component/Themes/MaterialDesignTheme.Popupbox.xaml" />
+            </ResourceDictionary.MergedDictionaries>
+        </ResourceDictionary>
+    </UserControl.Resources>
+    <Grid x:Name="FlightHistoryGrid"
+          Background="WhiteSmoke">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="auto"/>
+            <RowDefinition Height="10"/>
+            <RowDefinition Height="auto"/>
+        </Grid.RowDefinitions>
+        <Grid x:Name="datesGrid" Grid.Row="0">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="135"/>
+            </Grid.ColumnDefinitions>
+            <DatePicker Name="From"
+                        Width="140"
+                        materialDesign:HintAssist.Hint="From"
+                        Grid.Column="0"
+                        HorizontalAlignment="Center"
+                        Style="{StaticResource MaterialDesignOutlinedDatePicker}" />
+            <DatePicker Name="To"
+                        Width="140"
+                        materialDesign:HintAssist.Hint="To"
+                        Grid.Column="1"
+                        HorizontalAlignment="Right"
+                        Style="{StaticResource MaterialDesignOutlinedDatePicker}" />
+            <Button x:Name="SearchBtn"
+                    Style="{StaticResource MaterialDesignPaperButton}"
+                    ToolTip="Resource name: MaterialDesignPaperButton"
+                    Content="Search"
+                    IsEnabled="{Binding DataContext.ControlsEnabled, RelativeSource={RelativeSource FindAncestor, AncestorType=Window}}"
+                    Grid.Column="2"
+                    HorizontalAlignment="Center"/>
+
+        </Grid>
+        
+        <Grid x:Name="historyData" Grid.Row="2">
+            <DataGrid x:Name="allFlightsDataGrid" ItemsSource="{Binding}">
+            <DataGrid.Columns>
+                <DataGridTextColumn Binding="{Binding identification}" Header="ID"  
+                                    ElementStyle="{StaticResource MaterialDesignDataGridTextColumnStyle}"
+                                    EditingElementStyle="{StaticResource MaterialDesignDataGridTextColumnEditingStyle}" />
+                <DataGridTextColumn Binding="{Binding Source}" Header="Origin"  
+                                    ElementStyle="{StaticResource MaterialDesignDataGridTextColumnStyle}"
+                                    EditingElementStyle="{StaticResource MaterialDesignDataGridTextColumnEditingStyle}" />
+                <DataGridTextColumn Binding="{Binding Destination}" Header="Destenation"  
+                                    ElementStyle="{StaticResource MaterialDesignDataGridTextColumnStyle}"
+                                    EditingElementStyle="{StaticResource MaterialDesignDataGridTextColumnEditingStyle}" />
+                    <DataGridTextColumn Binding="{Binding departure}" Header="Departure"  
+                                    ElementStyle="{StaticResource MaterialDesignDataGridTextColumnStyle}"
+                                    EditingElementStyle="{StaticResource MaterialDesignDataGridTextColumnEditingStyle}" />
+                    <DataGridTextColumn Binding="{Binding arrival}" Header="Arrival"  
+                                    ElementStyle="{StaticResource MaterialDesignDataGridTextColumnStyle}"
+                                    EditingElementStyle="{StaticResource MaterialDesignDataGridTextColumnEditingStyle}" />
             
+            </DataGrid.Columns>
+            </DataGrid>
+        </Grid>
     </Grid>
 </UserControl>
