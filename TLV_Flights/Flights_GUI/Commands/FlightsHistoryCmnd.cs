@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Flights_GUI.Commands
 {
-    internal class FlightsHistoryCmnd : CommandBase
+    public class FlightsHistoryCmnd : CommandBase
     {
         public override void Execute(object paramater)
         {

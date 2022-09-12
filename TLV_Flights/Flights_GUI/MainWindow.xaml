@@ -34,5 +34,8 @@
         <!--<Usercontrols:UpdatePasswordUC x:Name="UpdatePassword" Grid.RowSpan="5" HorizontalAlignment="Center" VerticalAlignment="Center" HorizontalContentAlignment="Center" Opacity="1"
                                        Visibility="{Binding IsPassword, Converter={StaticResource BooleanToVisibilityConverter},Mode=TwoWay}"/>-->
         <Usercontrols:FlightInfoUC x:Name="FlightInfo" Grid.RowSpan="5" HorizontalAlignment="Left" Margin="0,-17,0,0"/>
-    </Grid>
+        
+        <Usercontrols:FlightsHistoryUC x:Name="FlightsHistory" Grid.RowSpan="5" HorizontalAlignment="Left"/>
+    
+</Grid>
 </Window>

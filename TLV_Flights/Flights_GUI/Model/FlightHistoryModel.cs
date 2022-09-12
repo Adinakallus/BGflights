@@ -16,12 +16,12 @@ namespace Flights_GUI.Model
         DateTime from;
         DateTime to;
         
-        public ObservableCollection<FlightInfo> flightsHistoryPerUser { get; set; }
+        public ObservableCollection<FlightInfo> UserFlightsHistory { get; set; }
         
         public FlightHistoryModel()
         {
             _bal = new BAL();
-            this.flightsHistoryPerUser = new ObservableCollection<FlightInfo>();
+            this.UserFlightsHistory = new ObservableCollection<FlightInfo>();
             this.from = DateTime.Today;
             this.to = DateTime.Today;
         }

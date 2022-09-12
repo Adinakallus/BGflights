@@ -56,7 +56,10 @@
         <Grid x:Name="historyData" Grid.Row="2">
             <DataGrid x:Name="allFlightsDataGrid" ItemsSource="{Binding}">
             <DataGrid.Columns>
-                <DataGridTextColumn Binding="{Binding identification}" Header="ID"  
+                <DataGridTextColumn Binding="{Binding Date}" Header="Date"  
+                                    ElementStyle="{StaticResource MaterialDesignDataGridTextColumnStyle}"
+                                    EditingElementStyle="{StaticResource MaterialDesignDataGridTextColumnEditingStyle}" />
+                <DataGridTextColumn Binding="{Binding identification}" Header="Flight code"  
                                     ElementStyle="{StaticResource MaterialDesignDataGridTextColumnStyle}"
                                     EditingElementStyle="{StaticResource MaterialDesignDataGridTextColumnEditingStyle}" />
                 <DataGridTextColumn Binding="{Binding Source}" Header="Origin"  
@@ -65,13 +68,10 @@
                 <DataGridTextColumn Binding="{Binding Destination}" Header="Destenation"  
                                     ElementStyle="{StaticResource MaterialDesignDataGridTextColumnStyle}"
                                     EditingElementStyle="{StaticResource MaterialDesignDataGridTextColumnEditingStyle}" />
-                    <DataGridTextColumn Binding="{Binding departure}" Header="Departure"  
+                    <DataGridTextColumn Binding="{Binding departure}" Header="Airline"  
                                     ElementStyle="{StaticResource MaterialDesignDataGridTextColumnStyle}"
                                     EditingElementStyle="{StaticResource MaterialDesignDataGridTextColumnEditingStyle}" />
-                    <DataGridTextColumn Binding="{Binding arrival}" Header="Arrival"  
-                                    ElementStyle="{StaticResource MaterialDesignDataGridTextColumnStyle}"
-                                    EditingElementStyle="{StaticResource MaterialDesignDataGridTextColumnEditingStyle}" />
-            
+                   
             </DataGrid.Columns>
             </DataGrid>
         </Grid>
