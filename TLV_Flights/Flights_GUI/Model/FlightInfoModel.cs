@@ -11,7 +11,7 @@ namespace Flights_GUI.Model
     public class FlightInfoModel
     {
         private readonly BAL _bal;
-        public FlightInfoModel(BAL bal)
+        public FlightInfoModel()
         {
             _bal = new ();
         }   
